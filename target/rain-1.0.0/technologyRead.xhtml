@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Test Rain</ui:define>
+
+
+
+    <ui:param name="viewname" value="TEST RAIN" />
+
+    <ui:define name="content">
+        <div class="p-col-12">
+            <div class="card">
+                <div class="ui-fluid p-formgrid p-grid">
+                    <div class="p-field p-col-12">
+                        <p:panelGrid columns="1" layout="flex"  contentStyleClass="ui-fluid">
+                            <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.richText1}" />
+                        </p:panelGrid>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
+
+
+
+</ui:composition>
+
+
+

@@ -1,0 +1,81 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateEdit.xhtml">
+
+    <ui:define name="title">Test Rain</ui:define>
+    <ui:param name="viewname" value="TEST RAIN" />
+    <ui:define name="content">
+        <form>
+            <div class="p-col-12">
+                <div class="card">
+                    <h5>Teknologi</h5>
+                    <div class="ui-fluid p-formgrid p-grid">
+                        <div class="p-field p-col-12 p-md-6">
+                            <h:inputHidden disabled="false" value="#{technologyAdminBean.technology.id_integer}" />
+                            <p:autoComplete id="dd" dropdown="true" multiple="true" completeMethod="#{technologyAdminBean.technology.selectedTechnologies}" placeholder="Search"/>
+
+                            <h:outputLabel  value="Teknologi:" />
+                            <p:selectCheckboxMenu id="teknologier77" value="#{technologyAdminBean.technology.selectedTechnologies}" label="Vælg Teknologi" multiple="true"
+                                                  filter="true" filterMatchMode="startsWith" >
+                                <p:ajax event="itemUnselect" listener="#{technologyAdminBean.onItemUnselect}" />
+                                <f:selectItems value="#{technologyAdminBean.availableTechnologies}" />
+                            </p:selectCheckboxMenu>
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            <p:outputLabel  value="Erfaring" />
+                            <h:form>
+                                <p:spinner />
+                            </h:form>
+                        </div>
+                        <div class="p-field p-col-12 p-md-3">
+                            <p:outputLabel for="niveau" value="Niveau" />
+                            <p:selectOneMenu id="niveau">
+                                <f:selectItem itemLabel="Select One" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItem itemLabel="Ekspert" itemValue="Ekspert" />
+                                <f:selectItem itemLabel="Godt kendskab" itemValue="Godt kendskab" />
+                                <f:selectItem itemLabel="Nybegynder" itemValue="Nybegynder" />
+                            </p:selectOneMenu>
+                        </div>
+                        <div class="p-field p-col-12">
+                            <p:outputLabel value="Beskrivelse" />
+                            <p:textEditor secure="false" readonly="false" value="#{technologyAdminBean.technology.richText1}"/>
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            <p:splitButton actionListener="#{technologyAdminBean.create}"  value="Gem" icon="pi pi-check" style="width: 80px; margin-right: 10px"></p:splitButton>
+                        </div>
+                        <div class="p-field p-col-12 p-md-1">
+                            <p:splitButton actionListener="#{technologyAdminBean.createNew}" value="Opret" icon="pi pi-check" style="width: 80px"></p:splitButton>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--<div class="p-grid table-demo">-->
+            <div class="p-col-12">
+                <div class="card">
+                    <h1>Liste over teknologier</h1>
+                    <p:dataTable id="bioData1" value="#{technologyAdminBean.list}" var="technology" reflow="true" rowKey="#{technology.technologyChoice}" paginator="true" rows="10" >
+                        <p:column headerText="ID" >
+                            <h:outputText value="#{technology.id_integer}"/>
+                        </p:column>
+
+                        <p:column headerText="Teknologi">
+                            <h:outputText value="#{technology.selectedTechnologies}" />
+                        </p:column>
+
+                        <p:column>
+                            <h:commandButton value="Rediger" action="#{technologyAdminBean.select(technology)}"/>
+                        </p:column>
+                    </p:dataTable>
+
+                </div>
+            </div>
+        </form>
+    </ui:define>
+</ui:composition>
+
+
+

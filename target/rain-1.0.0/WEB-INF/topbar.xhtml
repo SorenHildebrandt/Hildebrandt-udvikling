@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui" xmlns:po="http://primefaces.org/rain">
+
+    <div class="layout-topbar">
+        <div class="layout-topbar-wrapper">
+            <div class="layout-topbar-left">
+                 <h:link id="logolink" outcome="/technologyRead" styleClass="layout-topbar-logo">
+                    <!--<p:graphicImage name="images/#{ guestPreferences.lightLogo ? 'logo-rain-white.svg' : 'logo-rain-black.svg'}"  library="rain-layout" />-->
+                     <p:outputLabel style="color: white; font-size: large" title="Hildebrandt-udvikling">Hildebrandt - udvikling</p:outputLabel>
+                 </h:link>
+            </div>
+            <div class="layout-topbar-right">
+                <div class="menu-button-wrapper">
+                    <a href="#" class="menu-button">
+                        <div class="menu-button-bars">
+                            <span>P</span>
+                            <span></span>
+                            <span></span>
+                          </div>
+                          <div class="menu-button-times">
+                            <span></span>
+                            <span></span>
+                          </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</ui:composition>
