@@ -16,15 +16,19 @@ public class MongoProducer {
 
     @Produces
     public MongoClient create() throws UnknownHostException {
-
         System.out.println("public MongoClient create");
-        //MongoClientURI uri = new MongoClientURI("mongodb://hildebra_dbu1:xriGM5nCaU7U@uc4.nodecluster.net/hildebra_db1");
-        //MongoClient mongoClient = new MongoClient(uri);
 
-        mongoClient = new MongoClient();
-
-        return mongoClient;
-
+        if (mongoClient == null) {
+            System.out.println("mongo client er null");
+            //MongoClientURI uri = new MongoClientURI("mongodb://hildebra_dbu1:xriGM5nCaU7U@uc4.nodecluster.net/hildebra_db1");
+            //MongoClient mongoClient = new MongoClient(uri);
+            mongoClient = new MongoClient();
+            return mongoClient;
+        }
+        else {
+            System.out.println("mongo client er forskellig fra null");
+            return mongoClient;
+        }
     }
 }
 

@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,14 +38,12 @@ public class TechnologyAdminBean implements Serializable {
     @PostConstruct
     public void init() {
         System.out.println("TechnologyAdminBean postconstruct");
+
         availableTechnologies = Arrays.asList("Velkommen", "Java", "Intellij", "JSF", "Primefaces", "Mongo database", "Lotus Notes", "SharePoint",
                 "Azure", "Intranet", "Workflow applikationer", "Investering", "Aktier", "Bøger", "Musik", "Rejser", "Fritid", "Kundekontakt");
 
         availableCompetanceLevel = Arrays.asList("Vælg niveau", "Ekspert", "Godt kendskab", "Mindre kendskab");
         avalibleExperinceYear = Arrays.asList("0-1", "1-2", "2-3");
-
-
-
         find();
     }
 
@@ -67,7 +66,9 @@ public class TechnologyAdminBean implements Serializable {
 
     public void select(Technology e){
         System.out.println("select e.toString " + e.toString());
+
         technology=e;
+
     }
 
     public void onItemUnselect(UnselectEvent event) {
@@ -110,14 +111,6 @@ public class TechnologyAdminBean implements Serializable {
 
     public void setAvailableTechnologies(List<String> availableTechnologies) {
         this.availableTechnologies = availableTechnologies;
-    }
-
-    public List<String> getAvailableCompetanceLevel() {
-        return availableCompetanceLevel;
-    }
-
-    public void setAvailableCompetanceLevel(List<String> availableCompetanceLevel) {
-        this.availableCompetanceLevel = availableCompetanceLevel;
     }
 
     public List<String> getAvalibleExperinceYear() {

@@ -34,8 +34,7 @@ public class TechnologyModel extends HttpServlet {
     private List <String> selectedTechnologies;
     private ObjectId id;
     private Integer collectionCount_integer;
-    private String competenceLevel;
-    private String experinceYear;
+    private List <String> selectedExperienceYear;
 
     @Inject
     private transient MongoClient mongoClient;
@@ -49,55 +48,50 @@ public class TechnologyModel extends HttpServlet {
     String col_technology = "technology";
 
     public void create(Technology technology) {
-        //MongoClient mongoClient = new MongoClient();
         MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
-
         //collectionCount_integer = Math.toIntExact(collection.countDocuments());
         //System.out.println(collection.countDocuments());
-
         richText1 = technology.getRichText1();
         richText2 = technology.getRichText2();
-
         id_integer = technology.getId_integer();
-
         selectedTechnologies = technology.getSelectedTechnologies();
+        selectedExperienceYear = technology.getSelectedExperienceYear();
         System.out.println("selectedTechnologies: " + selectedTechnologies + " id_integer: " + id_integer  );
 
         if  (id_integer != 0) {
             System.out.println("id_integer er forskellig fra nul og et dokument skal opdaterets");
             //JsonWriterSettings prettyPrint = JsonWriterSettings.builder().indent(true).build();
-
             // update one document
             Bson filter = eq("id_integer", id_integer);
             System.out.println("Filter " + filter);
-            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("competenceLevel", competenceLevel), set("experinceYear", experinceYear));
+            //Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("competenceLevel", competenceLevel), set("experinceYear", experinceYear));
+            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("selectedExperienceYear", selectedExperienceYear));
             System.out.println("updateOperation " + updateOperation);
             UpdateResult updateResult = collection.updateOne(filter, updateOperation);
-            mongoClient.close();
+            //mongoClient.close();
             }
 
         if (id_integer == 0) {
             System.out.println("id_integer er 0 vi gemmer et nyt dokument");
-            MongoCollection<Document> collectionCount = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
-
-            collectionCount_integer = Math.toIntExact(collectionCount.countDocuments());
-            System.out.println(collectionCount.countDocuments());
+            //MongoCollection<Document> collectionCount = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
+            collectionCount_integer = Math.toIntExact(collection.countDocuments());
+            System.out.println("collection count" + collection.countDocuments());
             id_integer =  collectionCount_integer + 1;
             Document d = new Document().append("id_integer", id_integer)
                     .append("selectedTechnologies", technology.getSelectedTechnologies())
                     .append("richText1", technology.getRichText1())
                     .append("richText2", technology.getRichText2())
-                    .append("competenceLevel", technology.getCompetenceLevel())
-                    .append("experinceYear", technology.getExperinceYear());
+                    .append("selectedExperienceYear", technology.getSelectedExperienceYear());
 
             collection.insertOne(d);
-            mongoClient.close();
+            //mongoClient.close();
         }
     }
 
     public List<Technology> find(String filter) {
         System.out.println("TechnologyModel find" + filter);
         List<Technology> list = new ArrayList<>();
+
         MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
 
         FindIterable<Document> iter;
@@ -142,7 +136,7 @@ public class TechnologyModel extends HttpServlet {
         System.out.println("readTechnology DBObject query " + query);
         System.out.println("readTechnology DBObject data " + data);
         System.out.println("mongo client close i metoden find readTechnology");
-        mongoClient.close();
+        //mongoClient.close();
         return TechnologyConverter.toTechnology(data);
 
         }
@@ -157,7 +151,7 @@ public class TechnologyModel extends HttpServlet {
 
         DBObject dbObj = coll.findOne(query);
         System.out.println("mongo client close i metoden findDocumentById");
-        mongoClient.close();
+       // mongoClient.close();
         return TechnologyConverter.toTechnology(dbObj);
     }
 }

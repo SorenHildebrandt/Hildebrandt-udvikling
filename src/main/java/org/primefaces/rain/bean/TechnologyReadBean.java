@@ -47,7 +47,7 @@ public class TechnologyReadBean implements Serializable {
 
     private void findMenuById() {
         System.out.println("findMenuById");
-        String id = "5fca01f1d18cc80dabdf475d";
+        String id = "6037a7525ca4ee119032b80a";
         System.out.println("id_string er blank");
 
         //technology.setId(request2);

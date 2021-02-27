@@ -17,15 +17,14 @@ public class TechnologyConverter {
 		technology.setId_integer((Integer) doc.get("id_integer"));
 		technology.setSelectedTechnologies((List<String>) doc.get("selectedTechnologies"));
 		technology.setRichText1((String) doc.get("richText1"));
-		technology.setCompetenceLevel((String) doc.get("competenceLevel"));
-		technology.setExperinceYear((String) doc.get("experinceYear"));
+		technology.setSelectedExperienceYear((List<String>) doc.get("selectedExperienceYear"));
 
 		ObjectId id = (ObjectId) doc.get("_id");
 		technology.setId(id.toString());
 		String richText1 = technology.getRichText1();
 		System.out.println("richtext " + richText1);
-		String competenceLevel = technology.getCompetenceLevel();
-		System.out.println("competenceLevel  " + competenceLevel );
+		List<String> selectedExperienceYear = technology.getSelectedExperienceYear();
+		System.out.println("selectedExperienceYear  " + selectedExperienceYear );
 		return technology;
 
 	}
