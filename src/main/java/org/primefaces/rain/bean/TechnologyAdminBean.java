@@ -43,7 +43,7 @@ public class TechnologyAdminBean implements Serializable {
                 "Azure", "Intranet", "Workflow applikationer", "Investering", "Aktier", "Bøger", "Musik", "Rejser", "Fritid", "Kundekontakt");
 
         availableCompetanceLevel = Arrays.asList("Vælg niveau", "Ekspert", "Godt kendskab", "Mindre kendskab");
-        avalibleExperinceYear = Arrays.asList("0-1", "1-2", "2-3");
+        avalibleExperinceYear = Arrays.asList("Vælg","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20");
         find();
     }
 
@@ -57,6 +57,8 @@ public class TechnologyAdminBean implements Serializable {
         technology.setSelectedTechnologies(null);
         technology.setRichText1(null);
         technology.setId_integer(0);
+        technology.setSelectedCompetenceLevel(null);
+        technology.setSelectedExperienceYear(null);
     }
 
     public void find() {
@@ -119,5 +121,13 @@ public class TechnologyAdminBean implements Serializable {
 
     public void setAvalibleExperinceYear(List<String> avalibleExperinceYear) {
         this.avalibleExperinceYear = avalibleExperinceYear;
+    }
+
+    public List<String> getAvailableCompetanceLevel() {
+        return availableCompetanceLevel;
+    }
+
+    public void setAvailableCompetanceLevel(List<String> availableCompetanceLevel) {
+        this.availableCompetanceLevel = availableCompetanceLevel;
     }
 }

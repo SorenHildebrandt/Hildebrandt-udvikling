@@ -93,7 +93,7 @@
         <extension>svg#fontawesomeregular</extension>
         <mime-type>image/svg+xml</mime-type>
     </mime-mapping>
-    <session-config>
+   <!-- <session-config>
         <tracking-mode>COOKIE</tracking-mode>
-    </session-config>
+    </session-config>-->
 </web-app>

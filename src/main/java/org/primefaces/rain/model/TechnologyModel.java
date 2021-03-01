@@ -34,7 +34,8 @@ public class TechnologyModel extends HttpServlet {
     private List <String> selectedTechnologies;
     private ObjectId id;
     private Integer collectionCount_integer;
-    private List <String> selectedExperienceYear;
+    private String selectedExperienceYear;
+    private String selectedCompetenceLevel;
 
     @Inject
     private transient MongoClient mongoClient;
@@ -56,6 +57,7 @@ public class TechnologyModel extends HttpServlet {
         id_integer = technology.getId_integer();
         selectedTechnologies = technology.getSelectedTechnologies();
         selectedExperienceYear = technology.getSelectedExperienceYear();
+        selectedCompetenceLevel = technology.getSelectedCompetenceLevel();
         System.out.println("selectedTechnologies: " + selectedTechnologies + " id_integer: " + id_integer  );
 
         if  (id_integer != 0) {
@@ -65,7 +67,7 @@ public class TechnologyModel extends HttpServlet {
             Bson filter = eq("id_integer", id_integer);
             System.out.println("Filter " + filter);
             //Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("competenceLevel", competenceLevel), set("experinceYear", experinceYear));
-            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("selectedExperienceYear", selectedExperienceYear));
+            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("selectedExperienceYear", selectedExperienceYear), set("selectedCompetenceLevel",selectedCompetenceLevel));
             System.out.println("updateOperation " + updateOperation);
             UpdateResult updateResult = collection.updateOne(filter, updateOperation);
             //mongoClient.close();
@@ -81,7 +83,8 @@ public class TechnologyModel extends HttpServlet {
                     .append("selectedTechnologies", technology.getSelectedTechnologies())
                     .append("richText1", technology.getRichText1())
                     .append("richText2", technology.getRichText2())
-                    .append("selectedExperienceYear", technology.getSelectedExperienceYear());
+                    .append("selectedExperienceYear", technology.getSelectedExperienceYear())
+                    .append("selectedCompetenceLevel", technology.getSelectedCompetenceLevel());
 
             collection.insertOne(d);
             //mongoClient.close();

@@ -11,7 +11,9 @@ public class Technology implements Serializable {
     private String richText1;
     private String richText2;
     private List <String> selectedTechnologies;
-    private List <String> selectedExperienceYear;
+    //private List <String> selectedExperienceYear;
+    private String selectedExperienceYear;
+    private String selectedCompetenceLevel;
     private String id;
 
 
@@ -19,13 +21,14 @@ public class Technology implements Serializable {
     public Technology() {
     }
 
-    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, List<String> selectedExperienceYear, String id) {
+    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedExperienceYear, String selectedCompetenceLevel, String id) {
         this._id = _id;
         this.id_integer = id_integer;
         this.richText1 = richText1;
         this.richText2 = richText2;
         this.selectedTechnologies = selectedTechnologies;
         this.selectedExperienceYear = selectedExperienceYear;
+        this.selectedCompetenceLevel = selectedCompetenceLevel;
         this.id = id;
     }
 
@@ -69,12 +72,20 @@ public class Technology implements Serializable {
         this.id = id;
     }
 
-    public List<String> getSelectedExperienceYear() {
+    public String getSelectedExperienceYear() {
         return selectedExperienceYear;
     }
 
-    public void setSelectedExperienceYear(List<String> selectedExperienceYear) {
+    public void setSelectedExperienceYear(String selectedExperienceYear) {
         this.selectedExperienceYear = selectedExperienceYear;
+    }
+
+    public String getSelectedCompetenceLevel() {
+        return selectedCompetenceLevel;
+    }
+
+    public void setSelectedCompetenceLevel(String selectedCompetenceLevel) {
+        this.selectedCompetenceLevel = selectedCompetenceLevel;
     }
 }
 

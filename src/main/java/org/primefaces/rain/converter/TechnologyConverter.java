@@ -15,15 +15,19 @@ public class TechnologyConverter {
 		Technology technology = new Technology();
 
 		technology.setId_integer((Integer) doc.get("id_integer"));
+		//technology.setSelectedTechnologies((List<String>) doc.get("selectedTechnologies"));
 		technology.setSelectedTechnologies((List<String>) doc.get("selectedTechnologies"));
 		technology.setRichText1((String) doc.get("richText1"));
-		technology.setSelectedExperienceYear((List<String>) doc.get("selectedExperienceYear"));
+		//technology.setSelectedExperienceYear((List<String>) doc.get("selectedExperienceYear"));
+		technology.setSelectedExperienceYear((String) doc.get("selectedExperienceYear"));
+		technology.setSelectedCompetenceLevel((String) doc.get("selectedCompetenceLevel"));
 
 		ObjectId id = (ObjectId) doc.get("_id");
 		technology.setId(id.toString());
 		String richText1 = technology.getRichText1();
 		System.out.println("richtext " + richText1);
-		List<String> selectedExperienceYear = technology.getSelectedExperienceYear();
+		//List<String> selectedExperienceYear = technology.getSelectedExperienceYear();
+		String selectedExperienceYear = technology.getSelectedExperienceYear();
 		System.out.println("selectedExperienceYear  " + selectedExperienceYear );
 		return technology;
 
