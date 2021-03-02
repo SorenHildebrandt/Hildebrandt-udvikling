@@ -11,6 +11,7 @@ public class Technology implements Serializable {
     private String richText1;
     private String richText2;
     private List <String> selectedTechnologies;
+    private String selectedTech_string;
     //private List <String> selectedExperienceYear;
     private String selectedExperienceYear;
     private String selectedCompetenceLevel;
@@ -21,12 +22,13 @@ public class Technology implements Serializable {
     public Technology() {
     }
 
-    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedExperienceYear, String selectedCompetenceLevel, String id) {
+    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id) {
         this._id = _id;
         this.id_integer = id_integer;
         this.richText1 = richText1;
         this.richText2 = richText2;
         this.selectedTechnologies = selectedTechnologies;
+        this.selectedTech_string = selectedTech_string;
         this.selectedExperienceYear = selectedExperienceYear;
         this.selectedCompetenceLevel = selectedCompetenceLevel;
         this.id = id;
@@ -86,6 +88,14 @@ public class Technology implements Serializable {
 
     public void setSelectedCompetenceLevel(String selectedCompetenceLevel) {
         this.selectedCompetenceLevel = selectedCompetenceLevel;
+    }
+
+    public String getSelectedTech_string() {
+        return selectedTech_string;
+    }
+
+    public void setSelectedTech_string(String selectedTech_string) {
+        this.selectedTech_string = selectedTech_string;
     }
 }
 
