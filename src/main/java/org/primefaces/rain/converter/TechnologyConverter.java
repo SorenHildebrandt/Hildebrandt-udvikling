@@ -8,7 +8,7 @@ import java.util.List;
 
 public class TechnologyConverter {
 
-	// convert DBObject Object to Technology
+	// convert DBObject Object to Technology (java object)
 	// take special note of converting ObjectId to String
 	public static Technology toTechnology(DBObject doc) {
 		System.out.println("toTechnology data mongo " + doc);
@@ -22,10 +22,13 @@ public class TechnologyConverter {
 		technology.setSelectedTech_string(selectedTech_string);
 		technology.getSelectedTechnologies();
 		technology.setRichText1((String) doc.get("richText1"));
+		technology.setMenuTop((String) doc.get("menuTop"));
+		technology.setMenuSecondLevel((String) doc.get("menuSecondLevel"));
 		technology.setSelectedExperienceYear((String) doc.get("selectedExperienceYear"));
 		technology.setSelectedCompetenceLevel((String) doc.get("selectedCompetenceLevel"));
 		ObjectId id = (ObjectId) doc.get("_id");
 		technology.setId(id.toString());
+
 		String richText1 = technology.getRichText1();
 		System.out.println("richtext " + richText1);
 		String selectedExperienceYear = technology.getSelectedExperienceYear();

@@ -23,9 +23,12 @@
     <h:body styleClass="#{guestPreferences.inputStyleClass}">
         <div class="layout-wrapper layout-topbar-#{guestPreferences.topbarTheme} layout-menu-#{guestPreferences.menuTheme} #{guestPreferences.menuMode}" >
             <ui:include src="./topbar.xhtml"></ui:include>  
-            <ui:include src="./menu.xhtml"></ui:include>  
+            <ui:include src="./menu.xhtml"></ui:include>
 
-            <ui:include src="./rightpanel.xhtml"></ui:include>  
+            <h:panelGroup rendered="false">
+                <ui:include src="./rightpanel.xhtml"/>
+            </h:panelGroup>
+
             <ui:include src="./config.xhtml" />
 
             <div class="layout-main"> 

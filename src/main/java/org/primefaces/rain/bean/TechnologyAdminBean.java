@@ -21,13 +21,18 @@ import static com.mongodb.client.model.Updates.set;
 @Named("technologyAdminBean")
 @ViewScoped
 public class TechnologyAdminBean implements Serializable {
-    private Technology technology = new Technology();
+
+    private static final long serialVersionUID = -6516664185594636224L;
+
+
     private String filter = "";
     private List<String> availableTechnologies;
     private List<String> selectedTechnologies;
     private List<Technology> list = new ArrayList<>();
     private List<String> availableCompetanceLevel;
     private List<String> avalibleExperinceYear;
+
+    private Technology technology = new Technology();
 
     @Inject
     private transient TechnologyModel technologyModel;
@@ -39,11 +44,11 @@ public class TechnologyAdminBean implements Serializable {
     public void init() {
         System.out.println("TechnologyAdminBean postconstruct");
 
-        availableTechnologies = Arrays.asList("Velkommen", "Java", "Intellij", "JSF", "Primefaces", "Mongo database", "Lotus Notes udvikling", "SharePoint",
-                "Azure", "Intranet", "Workflow applikationer", "Investering", "Aktier", "Bøger", "Musik", "Rejser", "Fritid", "Kundekontakt");
+        availableTechnologies = Arrays.asList("Velkommen", "Java", "Intellij", "JSF", "Jenkins", "Wildfly", "Tomcat", "Github", "Primefaces", "Mongo database", "Lotus Notes udvikling", "SharePoint",
+                "Azure", "PowerApps", "Visual studio", "C-sharp", "AngularJS", "Octopus","Teamcity", "Intranet", "Workflow applikationer", "Support", "Second level support", "Investering", "Kundekontakt", "Aktier","Bæredygtighed", "El-biler","Sol, vind og lagring", "E-handel og platforme", "Bøger", "Musik", "Rejser", "Rejsebog", "Vandreture", "Vandreguide", "Fritid");
 
-        availableCompetanceLevel = Arrays.asList("Vælg niveau", "Ekspert", "Godt kendskab", "Mindre kendskab");
-        avalibleExperinceYear = Arrays.asList("Vælg","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20");
+        availableCompetanceLevel = Arrays.asList("Vælg niveau", "Meget erfaring", "Godt kendskab", "Mindre kendskab");
+        avalibleExperinceYear = Arrays.asList("Vælg","2001-nu","2002-nu","2003-nu","2004-nu","2005-nu","2006-nu","2007-nu","2008-nu","2009-nu","2010-nu","2011-nu","2012-nu","2013-nu","2014-nu","2015-nu","2016-nu","2017-nu","2018-nu","2019-nu","2020-nu", "2021-nu");
         find();
     }
 

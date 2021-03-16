@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Technology implements Serializable {
+
     private ObjectId _id;
     private int id_integer;
     private String richText1;
@@ -16,13 +17,15 @@ public class Technology implements Serializable {
     private String selectedExperienceYear;
     private String selectedCompetenceLevel;
     private String id;
+    private String menuTop;
+    private String menuSecondLevel;
 
 
 
     public Technology() {
     }
 
-    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id) {
+    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id, String menuTop, String menuSecondLevel) {
         this._id = _id;
         this.id_integer = id_integer;
         this.richText1 = richText1;
@@ -32,6 +35,8 @@ public class Technology implements Serializable {
         this.selectedExperienceYear = selectedExperienceYear;
         this.selectedCompetenceLevel = selectedCompetenceLevel;
         this.id = id;
+        this.menuTop = menuTop;
+        this.menuSecondLevel = menuSecondLevel;
     }
 
     public int getId_integer() {
@@ -96,6 +101,22 @@ public class Technology implements Serializable {
 
     public void setSelectedTech_string(String selectedTech_string) {
         this.selectedTech_string = selectedTech_string;
+    }
+
+    public String getMenuTop() {
+        return menuTop;
+    }
+
+    public void setMenuTop(String menuTop) {
+        this.menuTop = menuTop;
+    }
+
+    public String getMenuSecondLevel() {
+        return menuSecondLevel;
+    }
+
+    public void setMenuSecondLevel(String menuSecondLevel) {
+        this.menuSecondLevel = menuSecondLevel;
     }
 }
 

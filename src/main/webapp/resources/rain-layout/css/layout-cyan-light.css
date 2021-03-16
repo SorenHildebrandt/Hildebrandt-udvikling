@@ -4951,7 +4951,8 @@ a {
   overflow-x: hidden;
 }
 .layout-config .layout-config-content .layout-config-button {
-  display: block;
+  /*display: block; SRT: udkommenteret knap der viser konfiguration af rain*/
+  display: none;
   position: absolute;
   width: 52px;
   height: 52px;

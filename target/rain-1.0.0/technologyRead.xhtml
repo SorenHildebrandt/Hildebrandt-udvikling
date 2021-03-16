@@ -7,6 +7,18 @@
 
     <ui:define name="title">Hildebrandt - udvikling</ui:define>
 
+    <ui:define name="title">Button</ui:define>
+
+    <ui:define name="viewname">
+        <li style="font-size: 14px;padding-bottom: 2px; padding-left:20px; color: dimgrey; font-weight: normal">
+            <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.menuTop}"/>
+        </li>
+        <li><i class="pi pi-chevron-right"></i></li>
+        <li style="font-size: 14px; padding-bottom: 2px;color: dimgrey; font-weight: normal">
+            <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.menuSecondLevel}"/>
+        </li>
+    </ui:define>
+
     <ui:param name="viewname" value="TEST RAIN" />
 
     <ui:define name="content">
@@ -16,7 +28,7 @@
                     <div class="card overview-box">
                         <p:graphicImage name="images/dashboard/effect-useronline.svg" library="demo" />
                         <div class="overview">
-                            <span class="overview-title">Teknologi</span>
+                            <span class="overview-title">Emne</span>
                             <h3>
                                 <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.selectedTech_string}"/>
                             </h3>
@@ -27,7 +39,7 @@
                     <div class="card overview-box">
                         <p:graphicImage name="images/dashboard/effect-checkins.svg" library="demo" />
                         <div class="overview">
-                            <span class="overview-title">Erfaring (år):</span>
+                            <span class="overview-title">Periode (år):</span>
                             <h3>
                                 <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.selectedExperienceYear}"/>
                             </h3>
@@ -38,7 +50,7 @@
                     <div class="card overview-box">
                         <p:graphicImage name="images/dashboard/effect-filessynced.svg" library="demo" />
                         <div class="overview">
-                            <span class="overview-title">Kompetance niveau:</span>
+                            <span class="overview-title">Erfaring:</span>
                             <h3>
                                 <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.selectedCompetenceLevel}"/>
                             </h3>

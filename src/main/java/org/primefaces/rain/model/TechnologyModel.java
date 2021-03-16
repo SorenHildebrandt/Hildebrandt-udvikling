@@ -6,6 +6,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.result.UpdateResult;
 import org.primefaces.rain.converter.TechnologyConverter;
+import org.primefaces.rain.entity.Stocks;
 import org.primefaces.rain.entity.Technology;
 import org.bson.BsonDocument;
 import org.bson.BsonRegularExpression;
@@ -36,6 +37,8 @@ public class TechnologyModel extends HttpServlet {
     private Integer collectionCount_integer;
     private String selectedExperienceYear;
     private String selectedCompetenceLevel;
+    private String menutop;
+    private String menuSecondLevel;
 
     @Inject
     private transient MongoClient mongoClient;
@@ -58,8 +61,11 @@ public class TechnologyModel extends HttpServlet {
         selectedTechnologies = technology.getSelectedTechnologies();
         selectedExperienceYear = technology.getSelectedExperienceYear();
         selectedCompetenceLevel = technology.getSelectedCompetenceLevel();
+        menutop = technology.getMenuTop();
+        menuSecondLevel = technology.getMenuSecondLevel();
         System.out.println("selectedTechnologies: " + selectedTechnologies + " id_integer: " + id_integer  );
 
+        //Dokument skal opdateres
         if  (id_integer != 0) {
             System.out.println("id_integer er forskellig fra nul og et dokument skal opdaterets");
             //JsonWriterSettings prettyPrint = JsonWriterSettings.builder().indent(true).build();
@@ -67,7 +73,7 @@ public class TechnologyModel extends HttpServlet {
             Bson filter = eq("id_integer", id_integer);
             System.out.println("Filter " + filter);
             //Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("competenceLevel", competenceLevel), set("experinceYear", experinceYear));
-            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("selectedExperienceYear", selectedExperienceYear), set("selectedCompetenceLevel",selectedCompetenceLevel));
+            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("selectedExperienceYear", selectedExperienceYear), set("selectedCompetenceLevel",selectedCompetenceLevel), set("menuTop",menutop), set("menuSecondLevel",menuSecondLevel));
             System.out.println("updateOperation " + updateOperation);
             UpdateResult updateResult = collection.updateOne(filter, updateOperation);
             //mongoClient.close();
@@ -84,7 +90,9 @@ public class TechnologyModel extends HttpServlet {
                     .append("richText1", technology.getRichText1())
                     .append("richText2", technology.getRichText2())
                     .append("selectedExperienceYear", technology.getSelectedExperienceYear())
-                    .append("selectedCompetenceLevel", technology.getSelectedCompetenceLevel());
+                    .append("selectedCompetenceLevel", technology.getSelectedCompetenceLevel())
+                    .append("menuTop", technology.getMenuTop())
+                    .append("menuSecondLevel", technology.getMenuSecondLevel());
 
             collection.insertOne(d);
             //mongoClient.close();
@@ -156,6 +164,12 @@ public class TechnologyModel extends HttpServlet {
         System.out.println("mongo client close i metoden findDocumentById");
        // mongoClient.close();
         return TechnologyConverter.toTechnology(dbObj);
+    }
+
+    public List<Stocks> findStockList(String filter) {
+        System.out.println("TechnologyModel find" + filter);
+        List<Stocks> stocks = new ArrayList<>();
+        return stocks;
     }
 }
 

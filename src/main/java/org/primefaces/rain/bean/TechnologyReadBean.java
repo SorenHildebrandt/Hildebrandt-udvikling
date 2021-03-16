@@ -16,6 +16,7 @@ import java.util.List;
 @Named("technologyReadBean")
 @ViewScoped
 public class TechnologyReadBean implements Serializable {
+    private static final long serialVersionUID = -8464380091701999996L;
     private Technology technology = new Technology();
     private String filter = "";
     private String value;
@@ -42,7 +43,6 @@ public class TechnologyReadBean implements Serializable {
         }
         else
             findMenuById();
-
     }
 
     private void findMenuById() {

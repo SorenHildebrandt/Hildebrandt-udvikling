@@ -2,17 +2,37 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rain">
     
     <pr:menu widgetVar="RainMenuWidget">
-        <p:submenu id="om_components" label="Udvikling/teknologier" icon="pi pi-star">
-            <p:menuitem id="om_JavaJSFMongo" value="Java/JSF/Mongodb" icon="pi pi-id-card"  url="/rain-1.0.0/technologyRead.xhtml?id=603cb5a094efd56a55ac554c"></p:menuitem>
-            <p:menuitem id="om_lotusNotes" value="Lotus Notes" icon="pi pi-id-card" url="/rain-1.0.0/technologyRead.xhtml?id=603cb5b494efd56a55ac554d"  />
-            <p:menuitem id="om_microsoft" value="Microsoft teknologier" icon="pi pi-check-square" url="/rain-1.0.0/technologyRead.xhtml?id=603cb7bafae5496a18c6e5b0" />
+        <p:submenu id="om_technology" label="Udvikling/teknologier" icon="">
+            <p:menuitem id="om_JavaJSFMongo" value="Java/JSF/Mongodb" icon=""  url="/rain-1.0.0/technologyRead.xhtml?id=603cb5a094efd56a55ac554c"></p:menuitem>
+            <p:menuitem id="om_lotusNotes" value="Lotus Notes udvikling" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=603cb5b494efd56a55ac554d"  />
+            <p:menuitem id="om_microsoft" value="Microsoft teknologier" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=603cb7bafae5496a18c6e5b0" />
         </p:submenu>
-        <p:submenu id="om_utils" label=
-                "Fagområder" icon="pi pi-compass">
-            <p:menuitem id="om_intranet" value="Intranet" icon="pi pi-search" url="/rain-1.0.0/technologyRead.xhtml?id=602d021a64546a7817efa173" />
-            <p:menuitem id="om_workflowapp" value="Workflow applikationer" icon="pi pi-tablet" url="/rain-1.0.0/technologyRead.xhtml?id=602d03c364546a7817efa178" />
-            <p:menuitem id="om_kundekonkakt" value="Kundekontakt" icon="pi pi-clone" url="/rain-1.0.0/technologyRead.xhtml?id=602d08028e0e3e7ed978c1db" />
+        <p:submenu id="om_competance" label=
+                "Fagområder IT" icon="">
+            <p:menuitem id="om_intranet" value="Intranet" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=603f94dad31653373f3e8e17"/>
+            <p:menuitem id="om_workflowapp" value="Workflow applikationer" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=603f9530d31653373f3e8e18"/>
+            <p:menuitem id="om_kundekonkakt" value="Kundekontakt" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=603f95ebd31653373f3e8e20"/>
+            <p:menuitem id="om_support" value="Support" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=6046236693faf56a7e284917"  />
         </p:submenu>
+        <p:submenu id="om_travelandbook" label="Rejser og rejsebog" icon="">
+            <p:menuitem id="om_travel" value="Rejser" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=604623d093faf56a7e284920" />
+            <p:menuitem id="om_book" value="Man skal ikke stå i vejen for en flodhest" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=6046256b93faf56a7e284921" />
+        </p:submenu>
+        <p:submenu id="om_stocks" label="Aktier" icon="">
+            <p:menuitem id="om_strategy" value="Min aktieportefølje" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=6049e622745ad17b203ad068" />
+        </p:submenu>
+
     </pr:menu>
     
 </ui:composition>
+
+        <!--<p:submenu id="om_stocks" label="Aktier" icon="">
+                   <p:menuitem id="om_sustainibility" value="Bæredygtighed" icon=""  />
+                   <p:menuitem id="om_wind-Sun-Storage" value="Vind-Sol-Lagring" icon=""  />
+                   <p:menuitem id="om_Evcars" value="El biler" icon=""  />
+               </p:submenu>
+               <p:submenu id="om_music" label="Musik" icon="">
+                   <p:menuitem id="om_musictaste" value="Musik" icon="" />
+                   <p:menuitem id="om_livemusic" value="Live musik" icon="" />
+                   <p:menuitem id="om_roskildefestival" value="Roskildefestival" icon=""  />
+               </p:submenu>-->

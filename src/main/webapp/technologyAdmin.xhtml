@@ -11,11 +11,20 @@
                 <p:autoUpdate />
             </p:growl>
             <div class="card">
-                <h6>With Spacing</h6>
+                <div class="p-grid p-formgrid ui-fluid">
+                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                        <h:outputLabel  value="Brødkrumme Topmenu:" />
+                        <p:inputText value="#{technologyAdminBean.technology.menuTop}"></p:inputText>
+                    </div>
+                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                        <h:outputLabel  value="Brødkrumme 2.Level:" />
+                        <p:inputText value="#{technologyAdminBean.technology.menuSecondLevel}"></p:inputText>
+                    </div>
+                </div>
                 <div class="p-grid p-formgrid ui-fluid">
                     <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
                         <h:inputHidden disabled="false" value="#{technologyAdminBean.technology.id_integer}" />
-                        <h:outputLabel  value="Teknologi:" />
+                        <h:outputLabel  value="Emne:" />
                         <p:selectCheckboxMenu id="teknologier" value="#{technologyAdminBean.technology.selectedTechnologies}" label="Vælg Teknologi" multiple="true"
                                               filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                             <p:ajax event="itemUnselect" listener="#{technologyAdminBean.onItemUnselect}" />
@@ -23,18 +32,19 @@
                         </p:selectCheckboxMenu>
                     </div>
                     <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                        <h:outputLabel  value="Erfaring (år):" />
+                        <h:outputLabel  value="Periode (år):" />
                         <p:selectOneMenu value="#{technologyAdminBean.technology.selectedExperienceYear}">
                             <f:selectItems value="#{technologyAdminBean.avalibleExperinceYear}"></f:selectItems>
                         </p:selectOneMenu>
                     </div>
                     <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
-                        <h:outputLabel  value="Kompetance niveau:" />
+                        <h:outputLabel  value="Erfaring:" />
                         <p:selectOneMenu value="#{technologyAdminBean.technology.selectedCompetenceLevel}">
                             <f:selectItems value="#{technologyAdminBean.availableCompetanceLevel}"></f:selectItems>
                         </p:selectOneMenu>
                     </div>
                 </div>
+
                 <div class="p-field p-col-align-baseline">
                     <p:outputLabel value="Beskrivelse" />
                     <p:textEditor readonly="false" secure='false' value="#{technologyAdminBean.technology.richText1}"/>
