@@ -34,6 +34,7 @@ public class TechnologyConverter {
 		String selectedExperienceYear = technology.getSelectedExperienceYear();
 		System.out.println("selectedExperienceYear  " + selectedExperienceYear );
 		System.out.println("selectedTechnologies" + selectedTechnologies);
+		System.out.println("ID tech converter " + id);
 		return technology;
 	}
 }

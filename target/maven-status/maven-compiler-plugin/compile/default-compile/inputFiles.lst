@@ -27,6 +27,7 @@ C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\r
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\view\GridDemoView.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\component\RainMenuRenderer.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\domain\Product.java
+C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\bean\StockAdminBean.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\view\DashboardView.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\view\CalendarDemoView.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\bean\TechnologyAdminBean.java
@@ -34,5 +35,6 @@ C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\r
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\filter\CharacterEncodingFilter.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\service\CarService.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\view\ListDemoView.java
+C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\entity\Stock.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\domain\OrderStatus.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\domain\Car.java

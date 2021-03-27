@@ -1,0 +1,105 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="p-grid panel-demo">
+                <div class="p-col-12 p-md-6">
+                    <div class="card">
+                        <p:growl id="messages" showDetail="true" />
+                        <div class="products-buttonbar">
+                            <div>
+                                <p:commandButton value="New" icon="pi pi-plus" actionListener="#{stockAdminBean.openNew}" update="manage-product-content" oncomplete="PF('manageProductDialog').show()"
+                                                 styleClass="success-button" style="margin-right: .5rem" />
+                            </div>
+                        </div>
+                        <h5>Liste af aktier</h5>
+                        <p:dataTable id="technologyList" paginatorPosition="bottom" value="#{stockAdminBean.stocks}" var="stock" reflow="true" paginator="true" rows="10" >
+                            <f:facet name="header">
+                                <div class="customers-table-header">
+                                    <span style="font-weight: bold">TEKNOLOGIER</span>
+                                </div>
+                            </f:facet>
+                            <p:column headerText="Aktienavn">
+                                <f:facet name="header">Aktie Navn</f:facet>
+                                <h:outputText value="#{stock.stockName}"/>
+                            </p:column>
+
+                            <p:column>
+                                <f:facet name="header"></f:facet>
+                                <!--<p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"  />-->
+                               <h:commandButton value="Rediger" action="#{stockAdminBean.select(stock)}" />
+                            </p:column>
+                            <p:column>
+                                <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content" oncomplete="PF('manageStockDialog').show()"
+                                                 styleClass="edit-button rounded-button success-button" process="@this">
+                                    <f:setPropertyActionListener value="#{stock}" target="#{stockAdminBean.stock}" />
+                                </p:commandButton>
+                                <p:commandButton class="danger-button rounded-button" icon="pi pi-trash" process="@this" oncomplete="PF('deleteProductDialog').show()" >
+                                    <f:setPropertyActionListener value="#{stock}" target="#{stockAdminBean.stock}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-6">
+                    <div class="card">
+                        <p:outputPanel id="manage-product-content" class="ui-fluid">
+                            <h5>Input felter</h5>
+                            <div class="p-grid p-formgrid ui-fluid">                            <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                <h:outputLabel  value="Brødkrumme Topmenu:" />
+                                <p:inputText value="#{stockAdminBean.stock.menuTop}"></p:inputText>
+                            </div>
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <h:outputLabel  value="Brødkrumme 2.Level:" />
+                                    <p:inputText value="#{stockAdminBean.stock.menuSecondLevel}"></p:inputText>
+                                </div>
+                            </div>
+                            <div class="p-grid p-formgrid ui-fluid">
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <h:inputHidden disabled="false" value="#{stockAdminBean.stock.id_integer}" />
+                                    <h:outputLabel  value="Emne:" />
+                                    <p:selectCheckboxMenu id="teknologier" value="#{stockAdminBean.stock.selectedTechnologies}" label="Vælg Teknologi" multiple="true"
+                                                          filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
+                                        <p:ajax event="itemUnselect" listener="#{technologyAdminBean.onItemUnselect}" />
+                                        <f:selectItems value="#{technologyAdminBean.availableTechnologies}" />
+                                    </p:selectCheckboxMenu>
+                                </div>
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <h:outputLabel  value="Periode (år):" />
+                                    <p:selectOneMenu value="#{stockAdminBean.stock.selectedExperienceYear}">
+                                        <f:selectItems value="#{stockAdminBean.avalibleExperinceYear}"></f:selectItems>
+                                    </p:selectOneMenu>
+                                </div>
+                                <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
+                                    <h:outputLabel  value="Erfaring:" />
+                                    <p:selectOneMenu value="#{stockAdminBean.stock.selectedCompetenceLevel}">
+                                        <f:selectItems value="#{stockAdminBean.availableCompetanceLevel}"></f:selectItems>
+                                    </p:selectOneMenu>
+                                </div>
+                            </div>
+                            <div class="p-grid p-formgrid ui-fluid">
+                                <div class="p-col12 p-mb-2 p-lg-4 p-mb-1g-0">
+                                    <h:outputLabel value="Navn på aktie"></h:outputLabel>
+                                    <p:inputText value="#{stockAdminBean.stock.stockName}"></p:inputText>
+                                </div>
+                            </div>
+
+
+                            <div class="p-field p-col-align-baseline">
+                                <p:outputLabel value="Beskrivelse" />
+                                <p:textEditor readonly="false" secure='false' value="#{stockAdminBean.stock.richText1}"/>
+                            </div>
+                            <f:facet name="footer">
+                              </f:facet>
+                        </p:outputPanel>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+
+    </ui:define>
+</ui:composition>

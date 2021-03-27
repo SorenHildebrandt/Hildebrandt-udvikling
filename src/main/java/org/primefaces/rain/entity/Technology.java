@@ -71,7 +71,8 @@ public class Technology implements Serializable {
         this.selectedTechnologies = selectedTechnologies;
     }
 
-    public String getId() {
+    public String
+    getId() {
         return id;
     }
 
