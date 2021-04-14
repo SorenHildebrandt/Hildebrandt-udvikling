@@ -35,23 +35,23 @@
                         <p:growl id="messages" showDetail="true" />
                         <h4>Mine Aktier</h4>
                         <p></p>
-                            <p:dataTable id="dt-stocks" widgetVar="dtProducts" var="stock" value="#{stockAdminBean.stocks}" reflow="true" styleClass="products-table"
+                            <p:dataTable id="dt-stocks" widgetVar="dtStocks" var="stock" value="#{stockAdminBean.stocks}" reflow="true" styleClass="products-table"
                                          selection="#{stockAdminBean.stock}" rowKey="#{stockAdminBean.stock.stockName}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom" >
                             <f:facet name="header">
                                 <div class="customers-table-header">
                                     <span style="font-weight: bold">AKTIER</span>
                                     <span class="ui-input-icon-left filter-container">
                                         <i class="pi pi-search"></i>
-                                        <p:inputText id="globalFilter" onkeyup="PF('dtProducts').filter()" placeholder="Search"/>
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtStocks').filter()" placeholder="Search"/>
                                     </span>
                                 </div>
                             </f:facet>
                                 <p:column headerText="Aktie navn"  filterBy="#{stock.stockName}" sortBy="#{stock.stockName}">
-                                <h:outputText value="#{stock.stockName}" />
-                            </p:column>
-                            <p:column headerText="Tickerkode"  filterBy="#{stock.tickerCode}" sortBy="#{stock.tickerCode}">
-                                <h:outputText value="#{stock.tickerCode}" />
-                            </p:column>
+                                    <h:outputText value="#{stock.stockName}" />
+                                </p:column>
+                                <p:column headerText="Tickerkode"  filterBy="#{stock.tickerCode}" sortBy="#{stock.tickerCode}">
+                                    <h:outputText value="#{stock.tickerCode}" />
+                                </p:column>
                             <p:column>
                                 <p:commandButton icon="pi pi-pencil" update=":form:manage-stock-content" oncomplete="PF('manageStockDialog').show()"
                                                  styleClass="edit-button rounded-button success-button" process="@this">
@@ -63,8 +63,8 @@
                             </p:column>
                         </p:dataTable>
 
-                        <p:dialog header="Aktie beskrivelse" width="450" showEffect="fade" modal="true" widgetVar="manageStockDialog" responsive="true">
-                            <p:outputPanel id="manage-stock-content" class="ui-fluid">
+                       <!-- <p:dialog header="Aktie beskrivelse" width="450" showEffect="fade" modal="true" widgetVar="manageStockDialog" responsive="true">
+                       -->     <p:outputPanel id="manage-stock-content" class="ui-fluid">
                                 <p:outputPanel rendered="#{not empty stockAdminBean.stock}">
                                     <div class="p-field">
                                         <p:outputLabel for="name">Aktie navn</p:outputLabel>
@@ -85,7 +85,7 @@
                                 <p:commandButton value="Save" icon="pi pi-check" actionListener="#{stockAdminBean.saveStock}" update="manage-stock-content" process="manage-stock-content @this" />
                                 <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageStockDialog').hide()" class="secondary-button" />
                             </f:facet>
-                        </p:dialog>
+                       <!-- </p:dialog>-->
 
                         <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300" message="Delete the product?" header="Confirm" severity="warn">
                             <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{stockAdminBean.deleteStock}" process="@this" oncomplete="PF('deleteProductDialog').hide()"/>

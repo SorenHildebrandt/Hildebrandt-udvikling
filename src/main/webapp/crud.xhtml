@@ -15,84 +15,140 @@
         </li>
     </ui:define>
 
-    <ui:param name="viewname" value="CRUD" />
+    <ui:param name="viewname" value="MIN AKTIEPORTEFØLJE"/>
 
     <ui:define name="content">
         <h:form id="form">
             <div class="p-grid crud-demo">
                 <div class="p-col-12">
                     <div class="card">
-                        <p:growl id="messages" showDetail="true" />
-                        <p:dataTable id="dt-products" widgetVar="dtProducts" var="stock" value="#{stockAdminBean.stocks}" reflow="true" styleClass="products-table"
+                        <p:dataTable id="dt-stocks" widgetVar="dtStocks" var="stock"
+                                     value="#{stockAdminBean.stocks}" reflow="true" styleClass="products-table"
+                                     selection="#{stockAdminBean.stock}" rowKey="#{stockAdminBean.stock.stockName}"
                                      paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
                             <f:facet name="header">
-                                <div class="products-table-header">
-                                    <span style="font-weight: bold">PRODUCTS</span>
-                                
+                                <div class="customers-table-header" >
+                                    <span style="font-weight: bold;">Navn på aktie</span>
 
+                                        <span class="filter-container ui-input-icon-left"  >
+                                         <i class="pi pi-search"></i>
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtStocks').filter()"
+                                                     placeholder="Search"/>
+                                        </span>
                                 </div>
                             </f:facet>
 
-                            <p:ajax event="rowToggle" listener="#{crudDemoView.onRowToggle}" />
-                            <!--<p:ajax event="rowSelect" update=":form:delete-products-button" />-->
-                            <!--<p:ajax event="rowUnselect" update=":form:delete-products-button" />
-                            <p:ajax event="rowSelectCheckbox" update=":form:delete-products-button" />
-                            <p:ajax event="rowUnselectCheckbox" update=":form:delete-products-button" />
-                            <p:ajax event="toggleSelect" update=":form:delete-products-button" />-->
-
-                            <p:column exportable="false"></p:column>
-
-                            <p:column headerText="Aktie navn" >
-                                <h:outputText value="#{stock.stockName}" />
+                            <p:column headerText="Navn på Aktie" filterBy="#{stock.stockName}" sortBy="#{stock.stockName}">
+                                <h:outputText value="#{stock.stockName}"/>
                             </p:column>
 
+                            <p:column headerText="Købsdato" style="width: 100px" filterBy="#{stock.buyStockDate}" sortBy="#{stock.buyStockDate}">
+                                <h:outputText value="#{stock.buyStockDate}">
+                                    <f:convertDateTime pattern="dd.MM.yyyy" />
+                                </h:outputText>
+                            </p:column>
+
+                           <p:column headerText="Tickerkode" filterBy="#{stock.tickerCode}" sortBy="#{stock.tickerCode}">
+                                <h:outputText value="#{stock.tickerCode}"/>
+                            </p:column>
+
+                            <p:column headerText="Branche">
+                                <h:outputText value="#{stock.selectedBusiness}"/>
+                            </p:column>
+
+                            <p:column headerText="Pris" filterBy="#{stock.stockPrice}" sortBy="#{stock.stockPrice}">
+                                <h:outputText value="#{stock.stockPrice}"/>
+                            </p:column>
+
+                            <p:column headerText="Antal" filterBy="#{stock.numberOfStocks}" sortBy="#{stock.numberOfStocks}">
+                                <h:outputText value="#{stock.numberOfStocks}"/>
+                            </p:column>
+
+                           <!-- <p:column headerText="Afkast i %" filterBy="#{stock.returnInvest}" sortBy="#{stock.returnInvest}">
+                                <h:outputText value="#{stock.returnInvest}"/>
+                            </p:column>-->
+
                             <p:column exportable="false">
-                                <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content" oncomplete="PF('manageProductDialog').show()" 
-                                    styleClass="edit-button rounded-button success-button" process="@this">
-                                    <f:setPropertyActionListener value="#{stock}" target="#{stockAdminBean.stock}" />
+                                <p:commandButton icon="pi pi-pencil" update=":form:manage-product-content"
+                                                 oncomplete="PF('manageProductDialog').show()"
+                                                 styleClass="edit-button rounded-button success-button" process="@this">
+                                    <f:setPropertyActionListener value="#{stock}" target="#{stockAdminBean.stock}"/>
                                 </p:commandButton>
-                                <!--p:commandButton class="danger-button rounded-button" icon="pi pi-trash" process="@this" oncomplete="PF('deleteProductDialog').show()" >
-                                    <f:setPropertyActionListener value="#{product}" target="#{crudDemoView.selectedProduct}" />
-                                </p:commandButton>-->
                             </p:column>
                         </p:dataTable>
 
-                        <p:dialog header="Product Details" width="450" showEffect="fade" modal="true" widgetVar="manageProductDialog" responsive="true">
-                            <p:outputPanel id="manage-product-content" class="ui-fluid">
+                        <p:dialog header="Aktie beskrivelse" width="450" showEffect="fade" modal="true"
+                                  widgetVar="manageProductDialog" responsive="true" id="manage-product-content">
+<!--                            <p:outputPanel id="manage-product-content" class="card overview-box">-->
                                 <!--<p:outputPanel rendered="#{not empty crudDemoView.selectedProduct}">-->
-                                    <div class="p-field">
-                                        <p:outputLabel for="name">Name</p:outputLabel>
-                                        <p:inputText id="name" value="#{stockAdminBean.stock.stockName}" required="true" />
-                                    </div>
-                                <div class="p-field">
-                                    <p:outputLabel for="tickerCode">Ticker kode</p:outputLabel>
-                                    <p:inputText id="tickerCode" value="#{stockAdminBean.stock.tickerCode}" required="true" />
-                                </div>
-                                <div class="p-field">
-                                    <p:outputLabel for="description">Beskrivelse</p:outputLabel>
-                                    <p:inputTextarea id="description" value="#{stockAdminBean.stock.richText1}" />
-                                </div>
-                                <!--<div class="p-field">
-                                    <p:outputLabel>Aktiebeskrivelse</p:outputLabel>
-                                    <p:textEditor readonly="false" secure='false' value="#{stockAdminBean.stock.richText1}"/>
-                                </div>-->
+                               <!-- <div class="p-col">-->
+                                        <div class="overview">
+                                           <!-- <span class="overview-title">Navn og tickerkode</span>-->
+                                            <div class="ui-fluid p-formgrid p-grid">
+                                                <div class="p-field p-col-12 p-md-6">
+                                                    <p:outputLabel style="font-weight: bold" for="stockName" value="Navn og tickerkode"/><br/>
+                                                    <h:outputText id="stockName" type="text"
+                                                                  value="#{stockAdminBean.stock.stockName}"/>
+                                                </div>
+                                            </div>
 
-                            </p:outputPanel>
+                                            <div class="ui-fluid p-formgrid p-grid">
+                                                <div class="p-field p-col-12 p-md-6">
+                                                    <p:outputLabel style="font-weight: bold" for="business1" value="Branche"/><br/>
+                                                    <h:outputText id="business1" type="text"
+                                                                  value="#{stockAdminBean.stock.selectedBusiness_string}"/>
+                                                </div>
+                                                <div class="p-field p-col-12 p-md-6">
+                                                    <p:outputLabel style="font-weight: bold" for="stockPrice1" value="Pris"/><br/>
+                                                    <h:outputText id="stockPrice1"
+                                                                  value="#{stockAdminBean.stock.stockPrice}"/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-fluid p-formgrid p-grid">
+                                                <div class="p-field p-col-12 p-md-6">
+                                                    <p:outputLabel style="font-weight: bold" for="buyStockDate" value="Købsdato"/><br/>
+                                                    <h:outputText id="buyStockDate"
+                                                                  value="#{stockAdminBean.stock.buyStockDate}">
+                                                        <f:convertDateTime pattern="dd.MM.yyyy" />
+                                                    </h:outputText>
+                                                </div>
+                                                <div class="p-field p-col-12 p-md-6">
+                                                    <p:outputLabel style="font-weight: bold" for="returnInvest" value="Afkast i %"/><br/>
+                                                    <h:outputText id="returnInvest"
+                                                                  value="#{stockAdminBean.stock.returnInvest}"/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-fluid p-formgrid p-grid">
+                                                <div class="p-field p-col-12 p-md-6">
+                                                    <p:outputLabel style="font-weight: bold" for="numberOfStocks" value="Antal"/><br/>
+                                                    <h:outputText id="numberOfStocks" value="#{stockAdminBean.stock.numberOfStocks}"/>
+                                                </div>
+                                            </div>
+                                            <div class="p-field">
+                                                <p:outputLabel style="font-weight: bold" for="description">Beskrivelse</p:outputLabel>
+                                                <h:outputText id="description" escape="false" disabled="false"
+                                                              value="#{stockAdminBean.stock.richText1}"/>
+                                            </div>
+                                        </div>
 
-                            <f:facet name="footer">
-                                <p:commandButton value="Save" icon="pi pi-check" actionListener="#{stockAdminBean.saveStock}" update="manage-product-content" process="manage-product-content @this" />
-                                <p:commandButton value="Cancel" icon="pi pi-times" onclick="PF('manageProductDialog').hide()" class="secondary-button" />
-                            </f:facet>
-                        </p:dialog> 
+                                <!--</div>-->
+                            <!--</p:outputPanel>-->
+                        </p:dialog>
 
-                        <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300" message="Delete the product?" header="Confirm" severity="warn">
-                            <p:commandButton value="Yes" icon="pi pi-check" actionListener="#{crudDemoView.deleteProduct}" process="@this" oncomplete="PF('deleteProductDialog').hide()"/>
-                            <p:commandButton value="No" type="button" styleClass="secondary-button" icon="pi pi-times" onclick="PF('deleteProductDialog').hide()" />
+                        <p:confirmDialog widgetVar="deleteProductDialog" showEffect="fade" width="300"
+                                         message="Delete the product?" header="Confirm" severity="warn">
+                            <p:commandButton value="Yes" icon="pi pi-check"
+                                             actionListener="#{crudDemoView.deleteProduct}" process="@this"
+                                             oncomplete="PF('deleteProductDialog').hide()"/>
+                            <p:commandButton value="No" type="button" styleClass="secondary-button" icon="pi pi-times"
+                                             onclick="PF('deleteProductDialog').hide()"/>
                         </p:confirmDialog>
 
                         <p:confirmDialog global="true" showEffect="fade" width="300">
-                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
-                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no secondary-button" icon="pi pi-times" />
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                             icon="pi pi-check"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no secondary-button"
+                                             icon="pi pi-times"/>
                         </p:confirmDialog>
                     </div>
                 </div>

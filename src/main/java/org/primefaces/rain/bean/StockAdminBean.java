@@ -6,20 +6,20 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
-import org.bson.types.ObjectId;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import org.bson.Document;
 import org.primefaces.PrimeFaces;
-import org.primefaces.rain.domain.Product;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.rain.entity.Stock;
 
-import org.primefaces.rain.entity.Technology;
-import org.primefaces.rain.model.TechnologyModel;
+import org.primefaces.rain.model.StockModel;
 
 @Named("stockAdminBean")
 @ViewScoped
@@ -35,11 +35,20 @@ public class StockAdminBean implements Serializable {
     private List<String> availableCompetanceLevel;
     private Stock deleteStock;
     private Integer id_integer;
+    private String newDocument;
+    private List<String> selectedBusiness;
+    private List<String> avaliableBusiness;
+    String db_hildebra_db1 = "hildebra_db1";
+    String col_stock = "stocks";
+    private Integer collectionCount_integer;
 
     private Stock selectedStock;
 
     @Inject
-    private transient TechnologyModel technologyModel;
+    private transient StockModel stockModel;
+
+    @Inject
+    private transient MongoClient mongoClient;
 
     public StockAdminBean() {
     }
@@ -52,42 +61,69 @@ public class StockAdminBean implements Serializable {
                 "Azure", "PowerApps", "Visual studio", "C-sharp", "AngularJS", "Octopus","Teamcity", "Intranet", "Workflow applikationer", "Support", "Second level support", "Investering", "Kundekontakt", "Aktier","Bæredygtighed", "El-biler","Sol, vind og lagring", "E-handel og platforme", "Bøger", "Musik", "Rejser", "Rejsebog", "Vandreture", "Vandreguide", "Fritid");
         availableCompetanceLevel = Arrays.asList("Vælg niveau", "Meget erfaring", "Godt kendskab", "Mindre kendskab");
 
+        avaliableBusiness = Arrays.asList("Elbiler", "Vind", "Sol", "Platforme / Ehandel", "semiconductors");
+
+        newDocument="true";
+        id_integer=0;
+        collectionCount_integer=0;
+
+
         findStockList();
+    }
+
+    public void onItemUnselect(UnselectEvent event) {
+        FacesContext context = FacesContext.getCurrentInstance();
+
+        FacesMessage msg = new FacesMessage();
+        msg.setSummary("Item unselected: " + event.getObject().toString());
+        msg.setSeverity(FacesMessage.SEVERITY_INFO);
+
+        context.addMessage(null, msg);
     }
 
     private void findStockList() {
         System.out.println("StockAdminBean find");
-        stocks = technologyModel.findStockList(filter);
+        stocks = stockModel.findStockList(filter);
     }
 
-    public void saveStock() {
-        System.out.println("TechnologyAdminBean create");
+    public void saveStock(){
+        System.out.println("stockAdminBean saveStock");
+        MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_stock);
 
-        if (this.stock.getCode() == null) {
-            this.stock.setCode(UUID.randomUUID().toString().replaceAll("-", "").substring(0, 9));
-            this.stocks.add(this.stock);
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Added"));
-        }
-        else {
+        if ( newDocument == "true" && collectionCount_integer != 0){
+            System.out.println("Nyt dokument");
+            stockModel.saveStock(stock,newDocument, collectionCount_integer);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Updated"));
+            setNewDocument("false");
         }
 
-        technologyModel.saveStock(stock);
-        PrimeFaces.current().executeScript("PF('manageStockDialog').hide()");
-        PrimeFaces.current().ajax().update("form:messages", "form:dt-stocks");
-    }
+        if ( newDocument == "true" && collectionCount_integer == 0){
+            System.out.println("Nyt dokument && collectionCount_integer == 0");
+            stockModel.saveStock(stock,newDocument, collectionCount_integer);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Updated"));
+            setNewDocument("false");
+            collectionCount_integer = Math.toIntExact(collection.countDocuments());
+            setCollectionCount_integer(collectionCount_integer);
+        }
 
-    /*public void deleteStock(Stock e){
-    System.out.println("delete stockxxx");
-        stock=e;
-    }*/
+        if(newDocument == "false" && collectionCount_integer == 0) {
+            System.out.println("newDocument == false && collectionCount_integer == 0" );
+            stockModel.saveStock(stock,newDocument, collectionCount_integer);
+        }
+
+        if(newDocument == "false" && collectionCount_integer != 0) {
+            System.out.println("newDocument == false & collectionCount_integer != 0" );
+            stockModel.saveStock(stock,newDocument, collectionCount_integer);
+
+        }
+    }
 
     public void deleteStock() {
         System.out.println("delete product");
         id_integer = stock.getId_integer();
         System.out.println("Id_integer" + id_integer);
         stock.setId_integer(id_integer);
-        technologyModel.deleteStock(stock);
+        stockModel.deleteStock(stock);
 
        this.stocks.remove(this.stock);
         this.stock = null;
@@ -102,27 +138,32 @@ public class StockAdminBean implements Serializable {
 
     }
 
-    public void openNew() {
-        /*PrimeFaces.current().ajax().update("manageStockDialog");
-        System.out.println("OpenNew");
-        this.stock= new Stock();
-        PrimeFaces.current().ajax().update("manageStockDialog");*/
+    public void selectStock(){
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Product Updated"));
+        setNewDocument("false");
+        setCollectionCount_integer(0);
+    }
 
-        System.out.println("Clear felter og opret nyt dokument");
-        /*stock.setSelectedTechnologies(null);
-        stock.setRichText1(null);
+    public void openNew() throws IOException {
+        System.out.println("openNew");
+        MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_stock);
+        collectionCount_integer = Math.toIntExact(collection.countDocuments());
+        collectionCount_integer =  collectionCount_integer + 1;
+        setCollectionCount_integer(collectionCount_integer);
+
         stock.setId_integer(0);
-        stock.setSelectedCompetenceLevel(null);
-        stock.setSelectedExperienceYear(null);*/
-        this.stock= new Stock();
-        this.stock.setStockName(null);
-        this.stock.setTickerCode(null);
-        //widgetVar="manageStockDialog"
-
+        stock.setStockName(null);
+        stock.setSelectedBusiness(null);
+        stock.setTickerCode(null);
+        stock.setSelectedBusiness(null);
+        stock.setStockPrice(0);
+        stock.setReturnInvest(null);
+        stock.setNumberOfStocks(0);
+        stock.setRichText1(null);
+        setNewDocument("true");
     }
 
     public Stock getStock() {
-        System.out.println("getStock");
         return stock;
     }
 
@@ -170,5 +211,27 @@ public class StockAdminBean implements Serializable {
         this.selectedStock = selectedStock;
     }
 
+    public String getNewDocument() {
+        return newDocument;
+    }
 
+    public void setNewDocument(String newDocument) {
+        this.newDocument = newDocument;
+    }
+
+    public List<String> getAvaliableBusiness() {
+        return avaliableBusiness;
+    }
+
+    public void setAvaliableBusiness(List<String> avaliableBusiness) {
+        this.avaliableBusiness = avaliableBusiness;
+    }
+
+    public Integer getCollectionCount_integer() {
+        return collectionCount_integer;
+    }
+
+    public void setCollectionCount_integer(Integer collectionCount_integer) {
+        this.collectionCount_integer = collectionCount_integer;
+    }
 }

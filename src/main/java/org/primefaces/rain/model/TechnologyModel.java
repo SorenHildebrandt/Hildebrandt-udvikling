@@ -1,16 +1,11 @@
 package org.primefaces.rain.model;
 
-import com.google.gson.Gson;
 import com.mongodb.*;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Filters;
 import com.mongodb.client.result.UpdateResult;
 import org.primefaces.rain.converter.TechnologyConverter;
 import org.primefaces.rain.entity.Stock;
 import org.primefaces.rain.entity.Technology;
-import org.bson.BsonDocument;
-import org.bson.BsonRegularExpression;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -18,6 +13,7 @@ import org.bson.types.ObjectId;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServlet;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -42,6 +38,9 @@ public class TechnologyModel extends HttpServlet {
     private String menuSecondLevel;
     private String stockName;
     private String tickerCode;
+    private String stockRichText1;
+    private Date buyStockDate;
+    private Integer numberOfStocks;
 
     @Inject
     private transient MongoClient mongoClient;
@@ -56,40 +55,60 @@ public class TechnologyModel extends HttpServlet {
     String col_technology = "technology";
     String col_stocks = "stocks";
 
-    public void create(Technology technology) {
+    public void saveTechnology(Technology technology, String newDocument, Integer collectionCount_integer) {
         MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
-        //collectionCount_integer = Math.toIntExact(collection.countDocuments());
-        //System.out.println(collection.countDocuments());
+
         richText1 = technology.getRichText1();
+        System.out.println("richText1" + richText1);
         richText2 = technology.getRichText2();
         id_integer = technology.getId_integer();
         selectedTechnologies = technology.getSelectedTechnologies();
-        System.out.println("selectedTechnologies: " + selectedTechnologies + " id_integer: " + id_integer  );
+        System.out.println("selectedTechnologies: " + selectedTechnologies + " id_integer: " + id_integer   );
         selectedExperienceYear = technology.getSelectedExperienceYear();
         selectedCompetenceLevel = technology.getSelectedCompetenceLevel();
         menutop = technology.getMenuTop();
         menuSecondLevel = technology.getMenuSecondLevel();
+        buyStockDate = technology.getBuyStockDate();
+        System.out.println("collectionCount_integer " + collectionCount_integer);
+
+        System.out.println("newDocument " + newDocument);
 
         //Dokument skal opdateres
-        if  (id_integer != 0) {
-            System.out.println("id_integer er forskellig fra nul og et dokument skal opdaterets");
-            //JsonWriterSettings prettyPrint = JsonWriterSettings.builder().indent(true).build();
-            // update one document
+        if  (newDocument=="false" && collectionCount_integer == 0  ) {
+            System.out.println("newDocument==\"false\" && collectionCount_integer == 0");
             Bson filter = eq("id_integer", id_integer);
-            System.out.println("Filter " + filter);
-            //Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("competenceLevel", competenceLevel), set("experinceYear", experinceYear));
-            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2), set("selectedTechnologies", selectedTechnologies), set("selectedExperienceYear", selectedExperienceYear), set("selectedCompetenceLevel",selectedCompetenceLevel), set("menuTop",menutop), set("menuSecondLevel",menuSecondLevel));
+            System.out.println("Filter " + filter + " " + id_integer);
+            Bson updateOperation = combine(set("id_integer", id_integer),
+                    set("richText1", richText1), set("richText2", richText2),
+                    set("selectedTechnologies", selectedTechnologies),
+                    set("selectedExperienceYear", selectedExperienceYear),
+                    set("selectedCompetenceLevel",selectedCompetenceLevel),
+                    set("menuTop",menutop), set("menuSecondLevel",menuSecondLevel),
+                    set("buyStockDate",buyStockDate));
             System.out.println("updateOperation " + updateOperation);
             UpdateResult updateResult = collection.updateOne(filter, updateOperation);
-            //mongoClient.close();
-            }
+            System.out.println("updateResult " + updateResult);
+            } else {
+            Bson filter = eq("id_integer", collectionCount_integer);
+            System.out.println("else Filter " + filter + " " + collectionCount_integer);
+            Bson updateOperation = combine(set("id_integer", collectionCount_integer),
+                    set("richText1", richText1), set("richText2", richText2),
+                    set("selectedTechnologies", selectedTechnologies),
+                    set("selectedExperienceYear", selectedExperienceYear),
+                    set("selectedCompetenceLevel",selectedCompetenceLevel),
+                    set("menuTop",menutop), set("menuSecondLevel",menuSecondLevel),
+                    set("buyStockDate",buyStockDate));
+            System.out.println("updateOperation " + updateOperation);
+            UpdateResult updateResult = collection.updateOne(filter, updateOperation);
+            System.out.println("updateResult " + updateResult);
 
-        if (id_integer == 0) {
+        }
+
+        if (newDocument=="true") {
             System.out.println("id_integer er 0 vi gemmer et nyt dokument");
-            //MongoCollection<Document> collectionCount = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
-            collectionCount_integer = Math.toIntExact(collection.countDocuments());
+            this.collectionCount_integer = Math.toIntExact(collection.countDocuments());
             System.out.println("collection count" + collection.countDocuments());
-            id_integer =  collectionCount_integer + 1;
+            id_integer =  this.collectionCount_integer + 1;
             Document d = new Document().append("id_integer", id_integer)
                     .append("selectedTechnologies", technology.getSelectedTechnologies())
                     .append("richText1", technology.getRichText1())
@@ -97,42 +116,12 @@ public class TechnologyModel extends HttpServlet {
                     .append("selectedExperienceYear", technology.getSelectedExperienceYear())
                     .append("selectedCompetenceLevel", technology.getSelectedCompetenceLevel())
                     .append("menuTop", technology.getMenuTop())
-                    .append("menuSecondLevel", technology.getMenuSecondLevel());
+                    .append("menuSecondLevel", technology.getMenuSecondLevel())
+                    .append("buyStockDate", technology.getBuyStockDate());
 
             collection.insertOne(d);
             //mongoClient.close();
         }
-    }
-
-    public List<Stock> findStockList(String filter) {
-        System.out.println("TechnologyModel findStockLiat" + filter);
-        List<Stock> stocks = new ArrayList<>();
-        MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_stocks);
-
-        FindIterable<Document> iter;
-        //Läses
-        if (filter == null || filter.trim().length() == 0) {
-            System.out.println("TechnologyModel findStockList (collection.find)");
-            iter = collection.find();
-        } else {
-            //läses ikke
-            System.out.println("TechnologyModel findStockList (else)");
-            BsonRegularExpression bsonRegex = new BsonRegularExpression(filter);
-            BsonDocument bsonDoc = new BsonDocument();
-            bsonDoc.put("richText1", bsonRegex);
-            iter = collection.find(bsonDoc);
-        }
-        //läses
-        iter.forEach(new Block<Document>() {
-            @Override
-            public void apply(Document doc) {
-                stocks.add(new Gson().fromJson(doc.toJson(), Stock.class));
-                System.out.println("TechnologyModel findStockList: from Json to java object ");
-            }
-        });
-        //läses
-        System.out.println("TechnologyModel find (return aktie Liste)  " + stocks);
-        return stocks;
     }
 
     public List<Technology> find(String filter) {
@@ -141,27 +130,30 @@ public class TechnologyModel extends HttpServlet {
 
         MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
 
-        FindIterable<Document> iter;
+        //FindIterable<Document> iter;
         //Läses
-        if (filter == null || filter.trim().length() == 0) {
-            System.out.println("TechnologyModel find (collection.find)");
-            iter = collection.find();
-        } else {
-            //läses ikke
-            System.out.println("TechnologyModel find (else)");
-            BsonRegularExpression bsonRegex = new BsonRegularExpression(filter);
-            BsonDocument bsonDoc = new BsonDocument();
-            bsonDoc.put("richText1", bsonRegex);
-            iter = collection.find(bsonDoc);
+        for (Document docs : collection.find()) {
+            // do something
+            System.out.println("DBObject " + docs);
+            //System.out.println("DBObject " + docs.get("id_integer",id_integer);
+            Technology technology = new Technology();
+
+            technology.setBuyStockDate((Date) docs.get("buyStockDate"));
+            technology.setMenuTop((String) docs.get("menuTop"));
+            technology.setSelectedTechnologies((List<String>) docs.get("selectedTechnologies"));
+            technology.setMenuSecondLevel((String) docs.get("menuSecondLevel"));
+            technology.setSelectedExperienceYear((String) docs.get("selectedExperienceYear"));
+            technology.setSelectedCompetenceLevel((String) docs.get("selectedCompetenceLevel"));
+            technology.setId_integer((Integer) docs.get("id_integer"));
+            ObjectId id = (ObjectId) docs.get("_id");
+            technology.setRichText1((String) docs.get("richText1"));
+            technology.setId(id.toString());
+
+            list.add(technology);
+
+            //list.add(new Gson().fromJson(docs.toJson(), Technology.class));
         }
         //läses
-        iter.forEach(new Block<Document>() {
-            @Override
-            public void apply(Document doc) {
-                list.add(new Gson().fromJson(doc.toJson(), Technology.class));
-                System.out.println("TechnologyModel find: from Json to java object ");
-            }
-        });
         //läses
         System.out.println("TechnologyModel find (return Liste)  " + list);
         return list;
@@ -180,6 +172,7 @@ public class TechnologyModel extends HttpServlet {
                 .append("_id", new ObjectId(technology.getId())).get();
 
         DBObject data = coll.findOne(query);
+        //DBObject data = coll.
         System.out.println("readTechnology DBObject query " + query);
         System.out.println("readTechnology DBObject data " + data);
         System.out.println("mongo client close i metoden find readTechnology");
@@ -201,54 +194,7 @@ public class TechnologyModel extends HttpServlet {
        // mongoClient.close();
         return TechnologyConverter.toTechnology(dbObj);
     }
-    public void saveStock(Stock stock) {
-        MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_stocks);
-        richText1 = stock.getRichText1();
-        richText2 = stock.getRichText2();
-        id_integer = stock.getId_integer();
-        selectedTechnologies = stock.getSelectedTechnologies();
-        selectedExperienceYear = stock.getSelectedExperienceYear();
-        selectedCompetenceLevel = stock.getSelectedCompetenceLevel();
-        menutop = stock.getMenuTop();
-        menuSecondLevel = stock.getMenuSecondLevel();
-        //Felter til aktier
-        stockName = stock.getStockName();
-        tickerCode = stock.getTickerCode();
-        //System.out.println("selectedTechnologies: " + selectedTechnologies + " id_integer: " + id_integer  );
 
-        //Dokument skal opdateres
-        if  (id_integer != 0) {
-            System.out.println("id_integer er forskellig fra nul og et dokument skal opdaterets");
-            Bson filter = eq("id_integer", id_integer);
-            System.out.println("Filter " + filter);
-            Bson updateOperation = combine(set("id_integer", id_integer), set("richText1", richText1), set("richText2", richText2),
-                    set("selectedTechnologies", selectedTechnologies), set("selectedExperienceYear", selectedExperienceYear),
-                    set("selectedCompetenceLevel",selectedCompetenceLevel), set("menuTop",menutop), set("menuSecondLevel",menuSecondLevel),
-                    set("stockName",stockName), set("tickerCode",tickerCode));
-            System.out.println("updateOperation " + updateOperation);
-            UpdateResult updateResult = collection.updateOne(filter, updateOperation);
-            System.out.println("updateResult " + updateResult);
-        }
-
-        //Nyt dokument oprettes
-        if (id_integer == 0) {
-            System.out.println("id_integer er 0 vi gemmer et nyt dokument");
-            collectionCount_integer = Math.toIntExact(collection.countDocuments());
-            System.out.println("collection count" + collection.countDocuments());
-            id_integer =  collectionCount_integer + 1;
-            Document d = new Document().append("id_integer", id_integer)
-                    .append("selectedTechnologies", stock.getSelectedTechnologies())
-                    .append("richText1", stock.getRichText1())
-                    .append("richText2", stock.getRichText2())
-                    .append("selectedExperienceYear", stock.getSelectedExperienceYear())
-                    .append("selectedCompetenceLevel", stock.getSelectedCompetenceLevel())
-                    .append("menuTop", stock.getMenuTop())
-                    .append("menuSecondLevel", stock.getMenuSecondLevel())
-                    .append("stockName", stock.getStockName())
-                    .append("tickerCode", stock.getTickerCode());
-            collection.insertOne(d);
-        }
-    }
 
     public void deleteStock(Stock stock) {
         System.out.println("model delete stock");
@@ -258,6 +204,19 @@ public class TechnologyModel extends HttpServlet {
         Bson filter = eq("id_integer", id_integer);
         System.out.println("Filter " + filter);
         collection.deleteOne(filter);
+    }
+
+    public Integer collectionCount() {
+        System.out.println("collectionCount" );
+        MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_technology);
+
+        //System.out.println("collectionCount_integer" + collectionCount );
+        collectionCount_integer = Math.toIntExact(collection.countDocuments());
+        System.out.println("collection count" + collection.countDocuments());
+        Integer collectionCount =  collectionCount_integer + 1;
+        id_integer =  collectionCount_integer + 1;
+        System.out.println("id_integer coll" + id_integer );
+        return id_integer;
     }
 }
 

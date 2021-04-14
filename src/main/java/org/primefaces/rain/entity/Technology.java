@@ -3,6 +3,7 @@ package org.primefaces.rain.entity;
 import org.bson.types.ObjectId;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class Technology implements Serializable {
@@ -19,13 +20,14 @@ public class Technology implements Serializable {
     private String id;
     private String menuTop;
     private String menuSecondLevel;
+    public Date buyStockDate;
 
 
 
     public Technology() {
     }
 
-    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id, String menuTop, String menuSecondLevel) {
+    public Technology(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id, String menuTop, String menuSecondLevel, Date buyStockDate) {
         this._id = _id;
         this.id_integer = id_integer;
         this.richText1 = richText1;
@@ -37,6 +39,8 @@ public class Technology implements Serializable {
         this.id = id;
         this.menuTop = menuTop;
         this.menuSecondLevel = menuSecondLevel;
+        this.buyStockDate = buyStockDate;
+        //, Date buyStockDate
     }
 
     public int getId_integer() {
@@ -118,6 +122,14 @@ public class Technology implements Serializable {
 
     public void setMenuSecondLevel(String menuSecondLevel) {
         this.menuSecondLevel = menuSecondLevel;
+    }
+
+    public Date getBuyStockDate() {
+        return buyStockDate;
+    }
+
+    public void setBuyStockDate(Date buyStockDate) {
+        this.buyStockDate = buyStockDate;
     }
 }
 

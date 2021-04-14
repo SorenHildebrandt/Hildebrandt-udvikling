@@ -1,8 +1,10 @@
 package org.primefaces.rain.entity;
 
 import org.bson.types.ObjectId;
+import org.primefaces.rain.converter.GsonCompatibleDate;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 public class Stock implements Serializable {
@@ -26,11 +28,19 @@ public class Stock implements Serializable {
     private String country;
     private String purcaseDate;
     private String code;
+    //private GsonCompatibleDate buyStockDate;
+    private Date buyStockDate;
+    private Integer stockPrice;
+    private String returnInvest;
+    private List<String> selectedBusiness;
+    private String selectedBusiness_string;
+    private Integer numberOfStocks;
+
 
     public Stock() {
     }
 
-    public Stock(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id, String menuTop, String menuSecondLevel, String stockName, String tickerCode, int number, int price, String country, String purcaseDate, String code) {
+    public Stock(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id, String menuTop, String menuSecondLevel, String stockName, String tickerCode, int number, int price, String country, String purcaseDate, String code, Date buyStockDate, Integer stockPrice, String returnInvest, List<String> selectedBusiness, String selectedBusiness_string, Integer numberOfStocks) {
         this._id = _id;
         this.id_integer = id_integer;
         this.richText1 = richText1;
@@ -49,6 +59,12 @@ public class Stock implements Serializable {
         this.country = country;
         this.purcaseDate = purcaseDate;
         this.code = code;
+        this.buyStockDate = buyStockDate;
+        this.stockPrice = stockPrice;
+        this.returnInvest = returnInvest;
+        this.selectedBusiness = selectedBusiness;
+        this.selectedBusiness_string = selectedBusiness_string;
+        this.numberOfStocks = numberOfStocks;
     }
 
     public ObjectId get_id() {
@@ -193,5 +209,53 @@ public class Stock implements Serializable {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public Date getBuyStockDate() {
+        return buyStockDate;
+    }
+
+    public void setBuyStockDate(Date buyStockDate) {
+        this.buyStockDate = buyStockDate;
+    }
+
+    public Integer getStockPrice() {
+        return stockPrice;
+    }
+
+    public void setStockPrice(Integer stockPrice) {
+        this.stockPrice = stockPrice;
+    }
+
+    public String getReturnInvest() {
+        return returnInvest;
+    }
+
+    public void setReturnInvest(String returnInvest) {
+        this.returnInvest = returnInvest;
+    }
+
+    public List<String> getSelectedBusiness() {
+        return selectedBusiness;
+    }
+
+    public void setSelectedBusiness(List<String> selectedBusiness) {
+        this.selectedBusiness = selectedBusiness;
+    }
+
+    public Integer getNumberOfStocks() {
+        return numberOfStocks;
+    }
+
+    public void setNumberOfStocks(Integer numberOfStocks) {
+        this.numberOfStocks = numberOfStocks;
+    }
+
+    public String getSelectedBusiness_string() {
+        return selectedBusiness_string;
+    }
+
+    public void setSelectedBusiness_string(String selectedBusiness_string) {
+        this.selectedBusiness_string = selectedBusiness_string;
     }
 }

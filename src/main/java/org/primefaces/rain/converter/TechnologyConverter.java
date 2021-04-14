@@ -4,6 +4,7 @@ import com.mongodb.DBObject;
 import org.primefaces.rain.entity.Technology;
 import org.bson.types.ObjectId;
 
+import java.util.Date;
 import java.util.List;
 
 public class TechnologyConverter {
@@ -28,6 +29,11 @@ public class TechnologyConverter {
 		technology.setSelectedCompetenceLevel((String) doc.get("selectedCompetenceLevel"));
 		ObjectId id = (ObjectId) doc.get("_id");
 		technology.setId(id.toString());
+
+
+		Date buyStockDate = (Date) doc.get("buyStockDate");
+		//technology.setBuyStockDateString(buyStockDate.toString());
+
 
 		String richText1 = technology.getRichText1();
 		System.out.println("richtext " + richText1);

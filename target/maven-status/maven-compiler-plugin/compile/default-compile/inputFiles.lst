@@ -25,10 +25,12 @@ C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\r
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\domain\InventoryStatus.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\domain\Representative.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\view\GridDemoView.java
+C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\converter\GsonCompatibleDate.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\component\RainMenuRenderer.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\domain\Product.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\bean\StockAdminBean.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\view\DashboardView.java
+C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\model\StockModel.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\view\CalendarDemoView.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\bean\TechnologyAdminBean.java
 C:\Users\hilde\IdeaProjects\hildebrandt-udvikling\src\main\java\org\primefaces\rain\domain\Customer.java
