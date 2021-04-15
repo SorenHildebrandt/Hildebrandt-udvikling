@@ -53,18 +53,21 @@
                 <div class="p-col-12 p-md-6">
                     <div class="card">
                         <p:panel widgetVar="var" class="ui-fluid">
-                            <p:outputPanel id="manage-stock-content" rendered="#{not empty stockAdminBean.stock}">
+                            <p:outputPanel id="manage-stock-content">
                                 <h5>Beskriv aktien</h5>
                                 <div class="p-grid p-formgrid ui-fluid">
-                                    <h:inputText readonly="true" value="#{stockAdminBean.stock.id_integer}"/>
-                                    <h:inputText readonly="true" value="#{stockAdminBean.collectionCount_integer}"/>
-                                    <h:inputText readonly="true" value="#{stockAdminBean.newDocument}"/>
+                                    <h:inputHidden readonly="true" value="#{stockAdminBean.stock.id_integer}"/>
+                                    <h:inputHidden readonly="true" value="#{stockAdminBean.collectionCount_integer}"/>
+                                    <h:inputHidden readonly="true" value="#{stockAdminBean.newDocument}"/>
                                     <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">
                                         <h:outputLabel value="Branche:"/>
-                                        <p:selectCheckboxMenu id="teknologier" value="#{stockAdminBean.stock.selectedBusiness}" label="Vælg Teknologi" multiple="true"
-                                                              filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
-                                            <p:ajax event="itemUnselect" listener="#{stockAdminBean.onItemUnselect}" />
-                                            <f:selectItems value="#{stockAdminBean.avaliableBusiness}" />
+                                        <p:selectCheckboxMenu id="teknologier"
+                                                              value="#{stockAdminBean.stock.selectedBusiness}"
+                                                              label="Vælg Teknologi" multiple="true"
+                                                              filter="true" filterMatchMode="startsWith"
+                                                              panelStyle="width:250px">
+                                            <p:ajax event="itemUnselect" listener="#{stockAdminBean.onItemUnselect}"/>
+                                            <f:selectItems value="#{stockAdminBean.avaliableBusiness}"/>
                                         </p:selectCheckboxMenu>
                                     </div>
                                     <div class="p-col12 p-mb-2 p-lg-4 p-mb-1g-0">
@@ -98,7 +101,8 @@
                                 <div class="p-grid p-formgrid ui-fluid">
                                     <div class="p-col12 p-mb-2 p-lg-4 p-mb-1g-0">
                                         <h:outputLabel for="numberOfStocks">Antal</h:outputLabel>
-                                        <p:inputText id="numberOfStocks" value="#{stockAdminBean.stock.numberOfStocks}"/>
+                                        <p:inputText id="numberOfStocks"
+                                                     value="#{stockAdminBean.stock.numberOfStocks}"/>
                                     </div>
                                 </div>
                                 <div class="p-field p-col-align-baseline">
@@ -107,18 +111,20 @@
                                                   value="#{stockAdminBean.stock.richText1}"/>
                                 </div>
 
-
-                                <p:commandButton value="Save" icon="pi pi-check"
-                                                 actionListener="#{stockAdminBean.saveStock}"
-                                                 update="manage-stock-content" process="manage-stock-content @this"
-                                                 style="width:100px" styleClass="p-mr-2 p-mb-2"/>
-                                <p:commandButton value="Opret" icon="pi pi-plus"
-                                                 actionListener="#{stockAdminBean.openNew}" update="@form"
-                                                 style="width:100px"
-                                                 styleClass="success-button"/>
+                                <div class="products-buttonbar">
+                                    <div>
+                                        <p:commandButton value="Save" icon="pi pi-check"
+                                                         actionListener="#{stockAdminBean.saveStock}"
+                                                         update="manage-stock-content" process="manage-stock-content @this"
+                                                         style="width:100px" styleClass="p-mr-2 p-mb-2"/>
+                                        <p:commandButton value="Opret" icon="pi pi-plus"
+                                                         actionListener="#{stockAdminBean.openNew}"  update="manage-stock-content" process="manage-stock-content @this"
+                                                         style="width:100px"
+                                                         styleClass="success-button"/>
+                                    </div>
+                                </div>
 
                             </p:outputPanel>
-
                         </p:panel>
 
 
