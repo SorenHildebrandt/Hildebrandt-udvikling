@@ -46,6 +46,7 @@ public class StockModel extends HttpServlet {
     private String returnInvest;
     private Integer numberOfStocks;
     private List <String> selectedBusiness;
+    private String selectedValuta;
 
     @Inject
     private transient MongoClient mongoClient;
@@ -78,6 +79,7 @@ public class StockModel extends HttpServlet {
         stockPrice = stock.getStockPrice();
         returnInvest = stock.getReturnInvest();
         numberOfStocks = stock.getNumberOfStocks();
+        selectedValuta = stock.getSelectedValuta();
 
         System.out.println("collectionCount_integer " + collectionCount_integer);
         System.out.println("newDocument " + newDocument);
@@ -92,7 +94,7 @@ public class StockModel extends HttpServlet {
                     set("selectedCompetenceLevel",selectedCompetenceLevel), set("menuTop",menutop), set("menuSecondLevel",menuSecondLevel),
                     set("stockName",stockName), set("tickerCode",tickerCode), set("buyStockDate", buyStockDate),
                     set("stockPrice", stockPrice), set("returnInvest", returnInvest), set("numberOfStocks", numberOfStocks),
-                    set("selectedBusiness", selectedBusiness));
+                    set("selectedBusiness", selectedBusiness), set("selectedValuta", selectedValuta));
             System.out.println("updateOperation " + updateOperation);
             UpdateResult updateResult = collection.updateOne(filter, updateOperation);
             System.out.println("updateResult " + updateResult);
@@ -104,7 +106,7 @@ public class StockModel extends HttpServlet {
                     set("selectedCompetenceLevel",selectedCompetenceLevel), set("menuTop",menutop), set("menuSecondLevel",menuSecondLevel),
                     set("stockName",stockName), set("tickerCode",tickerCode), set("buyStockDate", buyStockDate),
                     set("stockPrice", stockPrice), set("returnInvest", returnInvest), set("numberOfStocks", numberOfStocks),
-                    set("selectedBusiness", selectedBusiness));
+                    set("selectedBusiness", selectedBusiness), set("selectedValuta", selectedValuta));
             System.out.println("updateOperation " + updateOperation);
             UpdateResult updateResult = collection.updateOne(filter, updateOperation);
             System.out.println("updateResult " + updateResult);
@@ -131,7 +133,8 @@ public class StockModel extends HttpServlet {
                      .append("stockPrice", stock.getStockPrice())
                      .append("returnInvest", stock.getReturnInvest())
                      .append("numberOfStocks", stock.getNumberOfStocks())
-                     .append("selectedBusiness", stock.getSelectedBusiness());
+                     .append("selectedBusiness", stock.getSelectedBusiness())
+                     .append("selectedValuta", stock.getSelectedValuta());
             collection.insertOne(d);
         }
     }
@@ -169,6 +172,7 @@ public class StockModel extends HttpServlet {
             String selectedBusiness_string = selectedBusiness.toString().replace("[", "").replace("]", "");
             System.out.println("selectedTech_string " + selectedBusiness_string);
             stock.setSelectedBusiness_string(selectedBusiness_string);
+            stock.setSelectedValuta((String) docs.get("selectedValuta"));
             list.add(stock);
 
             //list.add(new Gson().fromJson(docs.toJson(), Technology.class));

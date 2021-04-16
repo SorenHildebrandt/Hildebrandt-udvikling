@@ -1,5 +1,8 @@
-<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:p="http://primefaces.org/ui" xmlns:pr="http://primefaces.org/rain">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pr="http://primefaces.org/rain">
     
     <pr:menu widgetVar="RainMenuWidget">
         <p:submenu id="om_technology" label="Udvikling/teknologier" icon="">
@@ -19,7 +22,9 @@
             <p:menuitem id="om_book" value="Man skal ikke stå i vejen for en flodhest" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=6046256b93faf56a7e284921" />
         </p:submenu>
         <p:submenu id="om_stocks" label="Aktier" icon="">
-            <p:menuitem id="om_strategy" value="Min aktieportefølje" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=6049e622745ad17b203ad068" />
+            <p:menuitem id="om_strategy" value="Min strategi" icon="" url="/rain-1.0.0/technologyRead.xhtml?id=6049e622745ad17b203ad068" />
+            <p:menuitem id="om_portfolio" value="Min aktieportefølje" icon="" url="/rain-1.0.0/stockRead.xhtml" />
+
         </p:submenu>
 
     </pr:menu>

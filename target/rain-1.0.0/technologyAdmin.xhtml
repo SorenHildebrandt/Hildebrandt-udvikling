@@ -3,7 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/templateAdmin.xhtml">
 
     <ui:define name="content">
         <h:form id="form">
@@ -12,9 +12,9 @@
             </p:growl>
             <div class="card">
                 <p:outputPanel id="manage-technology-content">
-                    <h:inputText readonly="true" value="#{technologyAdminBean.technology.id_integer}"/>
-                    <h:inputText readonly="true" value="#{technologyAdminBean.collectionCount_integer}"/>
-                    <h:inputText readonly="true" value="#{technologyAdminBean.newDocument}"/>
+                    <h:inputHidden readonly="true" value="#{technologyAdminBean.technology.id_integer}"/>
+                    <h:inputHidden readonly="true" value="#{technologyAdminBean.collectionCount_integer}"/>
+                    <h:inputHidden readonly="true" value="#{technologyAdminBean.newDocument}"/>
 
                     <div class="p-grid p-formgrid ui-fluid">
                     <div class="p-col-12 p-mb-2 p-lg-4 p-mb-lg-0">

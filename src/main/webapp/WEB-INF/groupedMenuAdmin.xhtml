@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pr="http://primefaces.org/rain">
+    
+    <pr:menu widgetVar="RainMenuWidget">
+        <p:submenu id="om_content" label="Opret indhold" icon="">
+            <p:menuitem id="om_homePage" value="Hjemmeside" icon=""  url="/rain-1.0.0/technologyAdmin.xhtml"></p:menuitem>
+            <p:menuitem id="om_stocks" value="Aktier" icon="" url="/rain-1.0.0/stockAdmin.xhtml"  />
+        </p:submenu>
+    </pr:menu>
+    
+</ui:composition>
+
+        <!--<p:submenu id="om_stocks" label="Aktier" icon="">
+                   <p:menuitem id="om_sustainibility" value="Bæredygtighed" icon=""  />
+                   <p:menuitem id="om_wind-Sun-Storage" value="Vind-Sol-Lagring" icon=""  />
+                   <p:menuitem id="om_Evcars" value="El biler" icon=""  />
+               </p:submenu>
+               <p:submenu id="om_music" label="Musik" icon="">
+                   <p:menuitem id="om_musictaste" value="Musik" icon="" />
+                   <p:menuitem id="om_livemusic" value="Live musik" icon="" />
+                   <p:menuitem id="om_roskildefestival" value="Roskildefestival" icon=""  />
+               </p:submenu>-->

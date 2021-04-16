@@ -33,6 +33,7 @@ public class StockAdminBean implements Serializable {
     private List<String> avalibleExperinceYear;
     private List<String> availableSubjects;
     private List<String> availableCompetanceLevel;
+    private List<String> avaliableValuta;
     private Stock deleteStock;
     private Integer id_integer;
     private String newDocument;
@@ -62,11 +63,10 @@ public class StockAdminBean implements Serializable {
         availableCompetanceLevel = Arrays.asList("Vælg niveau", "Meget erfaring", "Godt kendskab", "Mindre kendskab");
 
         avaliableBusiness = Arrays.asList("Elbiler", "Vind", "Sol", "Platforme / Ehandel", "semiconductors");
-
+        avaliableValuta = Arrays.asList("Dkr", "Nkr", "$","Euro");
         newDocument="true";
         id_integer=0;
         collectionCount_integer=0;
-
 
         findStockList();
     }
@@ -233,5 +233,13 @@ public class StockAdminBean implements Serializable {
 
     public void setCollectionCount_integer(Integer collectionCount_integer) {
         this.collectionCount_integer = collectionCount_integer;
+    }
+
+    public List<String> getAvaliableValuta() {
+        return avaliableValuta;
+    }
+
+    public void setAvaliableValuta(List<String> avaliableValuta) {
+        this.avaliableValuta = avaliableValuta;
     }
 }

@@ -3,7 +3,7 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui"
-                template="/WEB-INF/template.xhtml">
+                template="/WEB-INF/templateAdmin.xhtml">
     <ui:define name="content">
         <h:form id="form">
             <div class="p-grid panel-demo">
@@ -63,7 +63,7 @@
                                         <h:outputLabel value="Branche:"/>
                                         <p:selectCheckboxMenu id="teknologier"
                                                               value="#{stockAdminBean.stock.selectedBusiness}"
-                                                              label="Vælg Teknologi" multiple="true"
+                                                              label="Vælg Branche" multiple="true"
                                                               filter="true" filterMatchMode="startsWith"
                                                               panelStyle="width:250px">
                                             <p:ajax event="itemUnselect" listener="#{stockAdminBean.onItemUnselect}"/>
@@ -103,6 +103,13 @@
                                         <h:outputLabel for="numberOfStocks">Antal</h:outputLabel>
                                         <p:inputText id="numberOfStocks"
                                                      value="#{stockAdminBean.stock.numberOfStocks}"/>
+                                    </div>
+                                    <div class="p-col12 p-mb-2 p-lg-4 p-mb-1g-0">
+                                        <h:outputLabel value="Branche"/>
+                                        <p:selectOneMenu value="#{stockAdminBean.stock.selectedValuta}">
+                                            <f:selectItems value="#{stockAdminBean.avaliableValuta}"></f:selectItems>
+                                        </p:selectOneMenu>
+
                                     </div>
                                 </div>
                                 <div class="p-field p-col-align-baseline">

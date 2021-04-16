@@ -8,14 +8,14 @@
     <ui:define name="title">CRUD</ui:define>
 
     <ui:define name="viewname">
-        <li>PAGES</li>
+        <li>Aktier</li>
         <li><i class="pi pi-chevron-right"></i></li>
         <li>
-            <p:link outcome="/crud">CRUD</p:link>
+            <p:link outcome="/stockRead">Min Aktieportefølje</p:link>
         </li>
     </ui:define>
 
-    <ui:param name="viewname" value="CRUD" />
+    <ui:param name="viewname" value="Min Aktieportefølje" />
 
     <ui:define name="content">
         <h:form id="form">
@@ -26,7 +26,7 @@
                                     selection="#{stockAdminBean.stock}" rowKey="#{stockAdminBean.stock.stockName}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
                             <f:facet name="header">
                                 <div class="products-table-header">
-                                    <span style="font-weight: bold">PRODUCTS</span>
+                                    <span style="font-weight: bold">AKTIER</span>
                                 
                                     <span class="filter-container ui-input-icon-left">
                                         <i class="pi pi-search"></i>
@@ -34,9 +34,6 @@
                                     </span>
                                 </div>
                             </f:facet>
-
-
-
 
                             <p:column headerText="Navn" filterBy="#{stock.stockName}" sortBy="#{stock.stockName}">
                                 <h:outputText value="#{stock.stockName}" />
@@ -103,7 +100,7 @@
                                     <div class="p-field p-col-12 p-md-6">
                                         <p:outputLabel style="font-weight: bold" for="stockPrice1" value="Pris"/><br/>
                                         <h:outputText id="stockPrice1"
-                                                      value="#{stockAdminBean.stock.stockPrice}"/>
+                                                      value="#{stockAdminBean.stock.stockPrice} #{stockAdminBean.stock.selectedValuta}"/>
                                     </div>
                                 </div>
                                 <div class="ui-fluid p-formgrid p-grid">

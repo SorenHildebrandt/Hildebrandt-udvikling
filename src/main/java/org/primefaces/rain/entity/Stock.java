@@ -31,6 +31,7 @@ public class Stock implements Serializable {
     //private GsonCompatibleDate buyStockDate;
     private Date buyStockDate;
     private Integer stockPrice;
+    private String selectedValuta;
     private String returnInvest;
     private List<String> selectedBusiness;
     private String selectedBusiness_string;
@@ -40,7 +41,7 @@ public class Stock implements Serializable {
     public Stock() {
     }
 
-    public Stock(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id, String menuTop, String menuSecondLevel, String stockName, String tickerCode, int number, int price, String country, String purcaseDate, String code, Date buyStockDate, Integer stockPrice, String returnInvest, List<String> selectedBusiness, String selectedBusiness_string, Integer numberOfStocks) {
+    public Stock(ObjectId _id, int id_integer, String richText1, String richText2, List<String> selectedTechnologies, String selectedTech_string, String selectedExperienceYear, String selectedCompetenceLevel, String id, String menuTop, String menuSecondLevel, String stockName, String tickerCode, int number, int price, String country, String purcaseDate, String code, Date buyStockDate, Integer stockPrice, String selectedValuta, String returnInvest, List<String> selectedBusiness, String selectedBusiness_string, Integer numberOfStocks) {
         this._id = _id;
         this.id_integer = id_integer;
         this.richText1 = richText1;
@@ -61,6 +62,7 @@ public class Stock implements Serializable {
         this.code = code;
         this.buyStockDate = buyStockDate;
         this.stockPrice = stockPrice;
+        this.selectedValuta = selectedValuta;
         this.returnInvest = returnInvest;
         this.selectedBusiness = selectedBusiness;
         this.selectedBusiness_string = selectedBusiness_string;
@@ -257,5 +259,13 @@ public class Stock implements Serializable {
 
     public void setSelectedBusiness_string(String selectedBusiness_string) {
         this.selectedBusiness_string = selectedBusiness_string;
+    }
+
+    public String getSelectedValuta() {
+        return selectedValuta;
+    }
+
+    public void setSelectedValuta(String selectedValuta) {
+        this.selectedValuta = selectedValuta;
     }
 }
