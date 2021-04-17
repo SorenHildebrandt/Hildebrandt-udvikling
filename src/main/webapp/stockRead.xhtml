@@ -5,7 +5,7 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/template.xhtml">
 
-    <ui:define name="title">CRUD</ui:define>
+    <ui:define name="title">Min aktieportefølje</ui:define>
 
     <ui:define name="viewname">
         <li>Aktier</li>
@@ -52,8 +52,8 @@
                                 <h:outputText value="#{stock.selectedBusiness}"/>
                             </p:column>
 
-                            <p:column headerText="Pris" filterBy="#{stock.stockPrice}" sortBy="#{stock.stockPrice}">
-                                <h:outputText value="#{stock.stockPrice}"/>
+                            <p:column headerText="Købspris" filterBy="#{stock.stockPrice}" sortBy="#{stock.stockPrice}">
+                                <h:outputText value="#{stock.stockPrice} #{stock.selectedValuta}"/>
                             </p:column>
 
                             <p:column headerText="Antal" filterBy="#{stock.numberOfStocks}" sortBy="#{stock.numberOfStocks}">

@@ -54,7 +54,7 @@
                     <div class="card">
                         <p:panel widgetVar="var" class="ui-fluid">
                             <p:outputPanel id="manage-stock-content">
-                                <h5>Beskriv aktien</h5>
+                                <h5>Opret aktie</h5>
                                 <div class="p-grid p-formgrid ui-fluid">
                                     <h:inputHidden readonly="true" value="#{stockAdminBean.stock.id_integer}"/>
                                     <h:inputHidden readonly="true" value="#{stockAdminBean.collectionCount_integer}"/>
@@ -105,7 +105,7 @@
                                                      value="#{stockAdminBean.stock.numberOfStocks}"/>
                                     </div>
                                     <div class="p-col12 p-mb-2 p-lg-4 p-mb-1g-0">
-                                        <h:outputLabel value="Branche"/>
+                                        <h:outputLabel value="Valuta"/>
                                         <p:selectOneMenu value="#{stockAdminBean.stock.selectedValuta}">
                                             <f:selectItems value="#{stockAdminBean.avaliableValuta}"></f:selectItems>
                                         </p:selectOneMenu>
