@@ -5,12 +5,16 @@
                 xmlns:p="http://primefaces.org/ui"
                 template="/WEB-INF/templateAdmin.xhtml">
 
+    <ui:define name="title">Hildebrandt - udvikling</ui:define>
+
     <ui:define name="content">
         <h:form id="form">
             <p:growl>
                 <p:autoUpdate/>
             </p:growl>
             <div class="card">
+                <h4>Opret kompetance</h4>
+
                 <p:outputPanel id="manage-technology-content">
                     <h:inputHidden readonly="true" value="#{technologyAdminBean.technology.id_integer}"/>
                     <h:inputHidden readonly="true" value="#{technologyAdminBean.collectionCount_integer}"/>
@@ -32,7 +36,7 @@
                         <h:outputLabel value="Emne:"/>
                         <p:selectCheckboxMenu id="teknologier"
                                               value="#{technologyAdminBean.technology.selectedTechnologies}"
-                                              label="Vælg Teknologi" multiple="true"
+                                              label="Vælg kompetance" multiple="true"
                                               filter="true" filterMatchMode="startsWith" panelStyle="width:250px">
                             <p:ajax event="itemUnselect" listener="#{technologyAdminBean.onItemUnselect}"/>
                             <f:selectItems value="#{technologyAdminBean.availableTechnologies}"/>
@@ -67,12 +71,9 @@
                 </p:outputPanel>
             </div>
 
-
-
-
             <div class="card">
                 <p:dataTable id="technologyList" paginatorPosition="bottom" value="#{technologyAdminBean.list}"
-                             var="technology" reflow="true" paginator="true" rows="10">
+                             var="technology" reflow="true" styleClass="products-table" paginator="true" rows="10">
                     <f:facet name="header">
                         <div class="customers-table-header">
                             <span style="font-weight: bold">TEKNOLOGIER</span>
@@ -84,7 +85,7 @@
                     </p:column>
 
                     <p:column headerText="tecnology">
-                        <f:facet name="header">Teknologi</f:facet>
+                        <f:facet name="header">Emne</f:facet>
                         <h:outputText value="#{technology.selectedTechnologies}"/>
                     </p:column>
 

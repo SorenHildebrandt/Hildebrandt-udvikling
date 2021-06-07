@@ -30,6 +30,7 @@ public class FileDemoView {
     private UploadedFile file;
 
     public UploadedFile getFile() {
+        System.out.println("getFile");
         return file;
     }
 
@@ -40,13 +41,17 @@ public class FileDemoView {
 
     public void upload() {
         if (file != null) {
+            System.out.println("upload");
             FacesMessage message = new FacesMessage("Successful", file.getFileName() + " is uploaded.");
             FacesContext.getCurrentInstance().addMessage(null, message);
+            //System.out.println("getContent" + file.getContent());
+
         }
     }
     
     public void handleFileUpload(FileUploadEvent event) {
         FacesMessage msg = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
         FacesContext.getCurrentInstance().addMessage(null, msg);
+
     }
 }

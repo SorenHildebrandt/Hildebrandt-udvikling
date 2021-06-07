@@ -1,0 +1,34 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateAdmin.xhtml">
+
+    <ui:define name="title">Hildebrandt - udvikling</ui:define>
+
+    <ui:define name="content">
+        <h:form id="form">
+            <div class="card">
+                <p:lineChart model="#{cartesianGraph.lineModel}" style="width: 100%; height: 500px;"/>
+            </div>
+        </h:form>
+    </ui:define>
+
+
+
+    <f:view>
+        <h:outputLabel value="Hello, world"/>
+    </f:view>
+
+    <style type="text/css">
+        .ui-chart {
+            margin-bottom: 50px;
+        }
+    </style>
+</ui:composition>
+
+
+
+
+

@@ -61,6 +61,7 @@ public class StockModel extends HttpServlet {
 
     public void saveStock(Stock stock, String newDocument, Integer collectionCount_integer) {
         MongoCollection<Document> collection = mongoClient.getDatabase(db_hildebra_db1).getCollection(col_stocks);
+        //mongoimport --db users --collection contacts --type csv --headerline --file /opt/backups/contacts.csv
 
         richText1 = stock.getRichText1();
         System.out.println("stockRichText1" +stockRichText1);

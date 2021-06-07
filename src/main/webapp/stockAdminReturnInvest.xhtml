@@ -1,0 +1,118 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/templateAdmin.xhtml">
+
+    <ui:define name="title">Hildebrandt - udvikling</ui:define>
+
+    <ui:define name="content">
+
+        <h:form id="form">
+            <p:growl>
+                <p:autoUpdate/>
+            </p:growl>
+            <div class="p-grid panel-demo">
+                <div class="p-col-12 p-md-6">
+                    <div class="card">
+                        <p:growl id="messages" showDetail="true"/>
+                        <h5>Liste af aktier</h5>
+                        <p:dataTable id="dt-stocks" widgetVar="dtStocks" var="stockReturnInvest" value="#{stockReturnInvestBean.stocksReturnInvest}"
+                                     reflow="true" styleClass="products-table"
+                                     selection="#{stockReturnInvestBean.stockReturnInvest}" rowKey="#{stockReturnInvestBean.stockReturnInvest.selectedStock}"
+                                     paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
+                            <f:facet name="header">
+                                <div class="customers-table-header">
+                                    <span style="font-weight: bold">AKTIER</span>
+                                    <span class="ui-input-icon-left filter-container">
+                                        <i class="pi pi-search"></i>
+                                        <p:inputText id="globalFilter" onkeyup="PF('dtStocks').filter()"
+                                                     placeholder="Search"/>
+                                    </span>
+                                </div>
+                            </f:facet>
+                            <p:column headerText="Aktie navn" filterBy="#{stockReturnInvest.selectedStock}" sortBy="#{stockReturnInvest.selectedStock}">
+                                <h:outputText value="#{stockReturnInvest.selectedStock}"/>
+                            </p:column>
+                            <p:column headerText="Afkast" filterBy="#{stockReturnInvest.returnInvestPercent}" sortBy="#{stockReturnInvest.returnInvestPercent}">
+                                <h:outputText value="#{stockReturnInvest.returnInvestPercent}"/>
+                            </p:column>
+                            <p:column>
+                                <p:commandButton icon="pi pi-pencil" update=":form:manage-stock-content"
+                                                 actionListener="#{stockReturnInvestBean.selectStock}"
+                                                 styleClass="edit-button rounded-button success-button" render="@this"
+                                                 process="@this">
+                                    <f:setPropertyActionListener value="#{stockReturnInvest}" target="#{stockReturnInvestBean.stockReturnInvest}"
+                                                                 update="@widgetVar(var)"/>
+                                </p:commandButton>
+                                <p:commandButton class="danger-button rounded-button" icon="pi pi-trash" process="@this"
+                                                 oncomplete="PF('deleteStockDialog').show()">
+                                    <f:setPropertyActionListener value="#{stockReturnInvest}" target="#{stockReturnInvestBean.stockReturnInvest}"/>
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                        <p:confirmDialog widgetVar="deleteStockDialog" showEffect="fade" width="300"
+                                         message="Slet denne aktie?" header="Confirm" severity="warn">
+                            <p:commandButton value="Yes" icon="pi pi-check"
+                                             actionListener="#{stockAdminBean.deleteStock}" process="@this"/>
+                            <p:commandButton value="No" type="button" styleClass="secondary-button" icon="pi pi-times"
+                                             onclick="PF('deleteStockDialog').hide()"/>
+                        </p:confirmDialog>
+                        <!-- i command button: oncomplete="PF('deleteProductDialog').hide()"-->
+                        <p:confirmDialog global="true" showEffect="fade" width="300">
+                            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"
+                                             icon="pi pi-check"/>
+                            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no secondary-button"
+                                             icon="pi pi-times"/>
+                        </p:confirmDialog>
+                    </div>
+                </div>
+                <div class="p-col-12 p-md-6">
+                    <div class="card">
+                        <p:panel widgetVar="var" class="ui-fluid">
+                            <p:outputPanel id="manage-stock-content">
+                                <h5>Registrer dagens aktieafkast</h5>
+                                <p:calendar showOn="button" showButtonPanel="true"
+                                            value="#{stockReturnInvestBean.stockReturnInvest.dateReturnInvest}"/>
+                                <div class="p-grid p-formgrid ui-fluid">
+                                    <h:inputHidden readonly="true" value="#{stockReturnInvestBean.stockReturnInvest.id_integer}"/>
+                                    <h:inputHidden readonly="true" value="#{stockReturnInvestBean.collectionCount_integer}"/>
+                                    <h:inputHidden readonly="true" value="#{stockReturnInvestBean.newDocument}"/>
+                                    <div class="p-col-4 p-mb-2 p-lg-4 p-mb-lg-0">
+
+                                    </div>
+                                </div>
+                                <div class="p-grid p-formgrid ui-fluid">
+                                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-1g-0">
+                                        <p:selectOneMenu value="#{stockReturnInvestBean.stockReturnInvest.selectedStock}">
+                                            <f:selectItems value="#{stockReturnInvestBean.avaliableStock}"></f:selectItems>
+                                        </p:selectOneMenu>
+                                    </div>
+                                </div>
+                                <div class="p-grid p-formgrid ui-fluid">
+                                    <div class="p-col-12 p-mb-2 p-lg-4 p-mb-1g-0">
+                                        <h:outputLabel value="Afkast i %"/>
+                                        <p:inputText value="#{stockReturnInvestBean.stockReturnInvest.returnInvestPercent}"/>
+                                    </div>
+                                </div>
+                                <div class="products-buttonbar">
+                                    <div>
+                                        <p:commandButton value="Gem" icon="pi pi-check"
+                                                         actionListener="#{stockReturnInvestBean.saveStockReturnInvest}"
+                                                         update="manage-stock-content" process="manage-stock-content @this"
+                                                         style="width:100px" styleClass="p-mr-2 p-mb-2"/>
+                                        <p:commandButton value="Opret" icon="pi pi-plus"
+                                                         actionListener="#{stockReturnInvestBean.openNew}"  update="manage-stock-content" process="manage-stock-content @this"
+                                                         style="width:100px"
+                                                         styleClass="success-button"/>
+                                    </div>
+                                </div>
+                            </p:outputPanel>
+                        </p:panel>
+                    </div>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>

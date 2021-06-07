@@ -3,6 +3,7 @@ package org.primefaces.rain.entity;
 import org.bson.types.ObjectId;
 import org.primefaces.rain.converter.GsonCompatibleDate;
 
+import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Stock implements Serializable {
     private String richText1;
     private String richText2;
     private List<String> selectedTechnologies;
+    private File file;
 
     private String selectedTech_string;
     private String selectedExperienceYear;

@@ -54,7 +54,7 @@ public class TechnologyAdminBean implements Serializable {
     public void init() {
         System.out.println("TechnologyAdminBean postconstruct");
 
-        availableTechnologies = Arrays.asList("Velkommen", "Java", "Intellij", "JSF", "Jenkins", "Wildfly", "Tomcat", "Github", "Primefaces", "Mongo database", "Lotus Notes udvikling", "SharePoint",
+        availableTechnologies = Arrays.asList("Java", "Intellij", "JSF", "Jenkins", "Wildfly", "Tomcat", "Github", "Primefaces", "Mongo database", "Lotus Notes udvikling", "SharePoint",
                 "Azure", "PowerApps", "Visual studio", "C-sharp", "AngularJS", "Octopus","Teamcity", "Intranet", "Workflow applikationer", "Support", "Second level support", "Investering", "Kundekontakt", "Aktier","Bæredygtighed", "El-biler","Sol, vind og lagring", "E-handel og platforme", "Bøger", "Musik", "Rejser", "Rejsebog", "Vandreture", "Vandreguide", "Fritid");
 
         availableCompetanceLevel = Arrays.asList("Vælg niveau", "Meget erfaring", "Godt kendskab", "Mindre kendskab");

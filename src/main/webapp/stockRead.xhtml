@@ -22,12 +22,18 @@
             <div class="p-grid crud-demo">
                 <div class="p-col-12">
                     <div class="card">
+
+                        <div style="font-weight: bold">Oversigt over mine aktier:<br/><br/></div>
+                        <div>Link til regneark der viser det daglige afkast over tid på mine aktier:<br/><br/>
+                            <a href="https://docs.google.com/spreadsheets/d/1eANKQK6_AIO1mRHM_qvTbhZEBQ3dXzGOWrrpFy2U5Ys/edit?usp=sharing" target="_blank">Mine Aktier</a><br /><br />
+                        </div>
+
                         <p:dataTable id="dt-products" widgetVar="dtProducts" var="stock" value="#{stockAdminBean.stocks}" reflow="true" styleClass="products-table"
                                     selection="#{stockAdminBean.stock}" rowKey="#{stockAdminBean.stock.stockName}" paginator="true" rows="10" rowSelectMode="add" paginatorPosition="bottom">
                             <f:facet name="header">
                                 <div class="products-table-header">
                                     <span style="font-weight: bold">AKTIER</span>
-                                
+
                                     <span class="filter-container ui-input-icon-left">
                                         <i class="pi pi-search"></i>
                                         <p:inputText id="globalFilter" onkeyup="PF('dtProducts').filter()" placeholder="Search" />
@@ -38,11 +44,11 @@
                             <p:column headerText="Navn" filterBy="#{stock.stockName}" sortBy="#{stock.stockName}">
                                 <h:outputText value="#{stock.stockName}" />
                             </p:column>
-                            <p:column headerText="Købsdato" style="width: 100px" filterBy="#{stock.buyStockDate}" sortBy="#{stock.buyStockDate}">
+                            <!--<p:column headerText="Købsdato" style="width: 100px" filterBy="#{stock.buyStockDate}" sortBy="#{stock.buyStockDate}">
                                 <h:outputText value="#{stock.buyStockDate}">
                                     <f:convertDateTime pattern="dd.MM.yyyy" />
                                 </h:outputText>
-                            </p:column>
+                            </p:column>-->
 
                             <p:column headerText="Tickerkode" filterBy="#{stock.tickerCode}" sortBy="#{stock.tickerCode}">
                                 <h:outputText value="#{stock.tickerCode}" />
@@ -52,7 +58,7 @@
                                 <h:outputText value="#{stock.selectedBusiness}"/>
                             </p:column>
 
-                            <p:column headerText="Købspris" filterBy="#{stock.stockPrice}" sortBy="#{stock.stockPrice}">
+                            <p:column headerText="GAV" filterBy="#{stock.stockPrice}" sortBy="#{stock.stockPrice}">
                                 <h:outputText value="#{stock.stockPrice} #{stock.selectedValuta}"/>
                             </p:column>
 
@@ -60,9 +66,9 @@
                                 <h:outputText value="#{stock.numberOfStocks}"/>
                             </p:column>
 
-                            <p:column headerText="Afkast i %" filterBy="#{stock.returnInvest}" sortBy="#{stock.returnInvest}">
+                            <!--<p:column headerText="Afkast i %" filterBy="#{stock.returnInvest}" sortBy="#{stock.returnInvest}">
                                 <h:outputText value="#{stock.returnInvest}"/>
-                            </p:column>
+                            </p:column>-->
 
 
                             <p:column exportable="false">
@@ -70,25 +76,36 @@
                                     styleClass="edit-button rounded-button success-button" process="@this">
                                     <f:setPropertyActionListener value="#{stock}" target="#{stockAdminBean.stock}" />
                                 </p:commandButton>
-
                             </p:column>
-
-
                         </p:dataTable>
 
-                        <p:dialog header="Aktie beskrivelse" width="450" showEffect="fade" modal="true"
+                        <p:dialog header="Min aktie" width="450" showEffect="fade" modal="true"
                                   widgetVar="manageProductDialog" responsive="true" id="manage-product-content">
-                            <!--                            <p:outputPanel id="manage-product-content" class="card overview-box">-->
-                            <!--<p:outputPanel rendered="#{not empty crudDemoView.selectedProduct}">-->
-                            <!-- <div class="p-col">-->
                             <div class="overview">
-                                <!-- <span class="overview-title">Navn og tickerkode</span>-->
+                                <div class="p-field">
+                                    <p:outputLabel style="font-weight: bold" for="description">Beskrivelse</p:outputLabel>
+                                    <h:outputText id="description" escape="false" disabled="false"
+                                                  value="#{stockAdminBean.stock.richText1}"/>
+                                </div>
                                 <div class="ui-fluid p-formgrid p-grid">
                                     <div class="p-field p-col-12 p-md-6">
                                         <p:outputLabel style="font-weight: bold" for="stockName" value="Navn og tickerkode"/><br/>
                                         <h:outputText id="stockName" type="text"
-                                                      value="#{stockAdminBean.stock.stockName}"/>
+                                                      value="#{stockAdminBean.stock.stockName} #{stockAdminBean.stock.tickerCode}"/>
                                     </div>
+                                    <div class="p-field p-col-12 p-md-6">
+                                        <p:outputLabel style="font-weight: bold" for="stockPrice1" value="GAV"/><br/>
+                                        <h:outputText id="stockPrice1"
+                                                      value="#{stockAdminBean.stock.stockPrice} #{stockAdminBean.stock.selectedValuta}"/>
+                                    </div>
+                                   <!-- <div class="p-field p-col-12 p-md-6">
+                                        <p:outputLabel style="font-weight: bold" for="buyStockDate" value="Købsdato"/><br/>
+                                        <h:outputText id="buyStockDate"
+                                                      value="#{stockAdminBean.stock.buyStockDate}">
+                                            <f:convertDateTime pattern="dd.MM.yyyy" />
+                                        </h:outputText>
+
+                                    </div>-->
                                 </div>
 
                                 <div class="ui-fluid p-formgrid p-grid">
@@ -98,48 +115,24 @@
                                                       value="#{stockAdminBean.stock.selectedBusiness_string}"/>
                                     </div>
                                     <div class="p-field p-col-12 p-md-6">
-                                        <p:outputLabel style="font-weight: bold" for="stockPrice1" value="Pris"/><br/>
-                                        <h:outputText id="stockPrice1"
-                                                      value="#{stockAdminBean.stock.stockPrice} #{stockAdminBean.stock.selectedValuta}"/>
+                                        <p:outputLabel style="font-weight: bold" for="numberOfStocks2" value="Antal"/><br/>
+                                        <h:outputText id="numberOfStocks2" value="#{stockAdminBean.stock.numberOfStocks}"/>
                                     </div>
+
                                 </div>
                                 <div class="ui-fluid p-formgrid p-grid">
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <p:outputLabel style="font-weight: bold" for="buyStockDate" value="Købsdato"/><br/>
-                                        <h:outputText id="buyStockDate"
-                                                      value="#{stockAdminBean.stock.buyStockDate}">
-                                            <f:convertDateTime pattern="dd.MM.yyyy" />
-                                        </h:outputText>
-                                    </div>
-                                    <div class="p-field p-col-12 p-md-6">
+
+                                    <!--<div class="p-field p-col-12 p-md-6">
                                         <p:outputLabel style="font-weight: bold" for="returnInvest" value="Afkast i %"/><br/>
                                         <h:outputText id="returnInvest"
                                                       value="#{stockAdminBean.stock.returnInvest}"/>
-                                    </div>
-                                </div>
-                                <div class="ui-fluid p-formgrid p-grid">
-                                    <div class="p-field p-col-12 p-md-6">
-                                        <p:outputLabel style="font-weight: bold" for="numberOfStocks" value="Antal"/><br/>
-                                        <h:outputText id="numberOfStocks" value="#{stockAdminBean.stock.numberOfStocks}"/>
-                                    </div>
-                                </div>
-                                <div class="p-field">
-                                    <p:outputLabel style="font-weight: bold" for="description">Beskrivelse</p:outputLabel>
-                                    <h:outputText id="description" escape="false" disabled="false"
-                                                  value="#{stockAdminBean.stock.richText1}"/>
+                                    </div>-->
                                 </div>
                             </div>
-
-                            <!--</div>-->
-                            <!--</p:outputPanel>-->
                         </p:dialog>
-
-
                     </div>
                 </div>
             </div>
         </h:form>
-
     </ui:define>
-
 </ui:composition>

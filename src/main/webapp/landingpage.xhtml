@@ -10,11 +10,106 @@
     <ui:param name="viewname" value="TEST RAIN" />
 
     <ui:define name="content">
-        <div class="card">
-            <div class="p-field p-col-align-baseline">
-                <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.richText1}" />
+        <!--<div class="card">-->
+            <div class="ui-fluid p-formgrid p-grid">
+            <div class="p-field p-col-12 p-md-6">
+                <div class="col-md-6 contact-info">
+                    <div>
+                        <h3 style="padding-left: 0px;padding-bottom: 30px">Søren Hildebrandt</h3>
+                        <ul style="list-style-type: none;padding-left: 0px">
+                            <li><span style="font-size: 14px">Lokation:</span><span style="padding-left: 20px;font-size: 16px">Oxie, Malmø</span></li>
+                            <p:separator style="background-color: #000600;border-color:rgb(0,6,0);height:1px;"/>
+                            <li>Email:<span style="padding-left: 40px"><a href="mailto:hildebrandt.soren@gmail.com">hildebrandt.soren@gmail.com</a></span></li>
+                            <p:separator style="background-color: #000600;border-color:#000600;height:1px;"/>
+                            <li>Telefon:<span style="padding-left: 28px"><a href="tel:31332471">+45 31 332 471</a></span></li>
+                            <p:separator style="background-color: #000600;border-color:#000600;height:1px;"/>
+                            <li>Sprog:<span style="padding-left: 37px">Dansk, Svensk og Engelsk</span></li>
+                            <p:separator style="background-color: #000600;border-color:#000600;height:1px"/>
+                        </ul>
+                        <br /><a href="/rain-1.0.0/resources/files/cv.docx" target="_blank">Download CV</a><br /><br />
+                    </div>
+                </div>
+            </div>
+            <div class="p-field p-col-12 p-md-6">
+                <h3 style="padding-bottom: 30px">Primære kompetancer</h3>
+                <h:outputText id="output1" /><span style="padding-right: 170px">Java EE, JSF/Primefaces, MongoDB</span><span >70%<h:outputText>70%</h:outputText></span>
+                <div style="padding-top: 11px;padding-bottom: 10px">
+                    <h:inputHidden id="txt1" value="70"/>
+                    <p:slider disabled="true" for="txt1" display="output1" style="width: 410px;background-color: #00a7d5;border-color:#00a7d5;height:8px" displayTemplate="%{70}"/>
+                </div>
+
+                <h:outputText id="output2" style="padding-right: 275px;padding-bottom: 30px;padding-top: 20px" value="Intranet specialist"/><h:outputText value="90%"/>
+                <div style="padding-top: 11px;padding-bottom: 10px">
+                    <h:inputHidden id="txt2" value="90"/>
+                    <p:slider disabled="true" for="txt2" display="output2" style="width: 410px;background-color: #00a7d5;border-color:#00a7d5;height:8px" displayTemplate="%{90}"/>
+                </div>
+
+                <h:outputText id="output3" style="padding-right: 235px;padding-bottom: 30px;padding-top: 20px" value="Workflow app. udvikling"/><h:outputText value="90%"/>
+                <div style="padding-top: 11px;padding-bottom: 10px">
+                    <h:inputHidden id="txt3" value="90"/>
+                    <p:slider disabled="true" for="txt3" display="output3" style="width: 410px;background-color: #00a7d5;border-color:#00a7d5;height:8px" displayTemplate="%{90}"/>
+                </div>
+
+                <h:outputText id="output4" /><span style="padding-right: 250px">Lotus Notes udvikling</span><span >95%<h:outputText>95%</h:outputText></span>
+                <div style="padding-top: 11px;padding-bottom: 10px">
+                    <h:inputHidden id="txt4" value="95"/>
+                    <p:slider disabled="true" for="txt4" display="output4" style="width: 410px;background-color: #00a7d5;border-color:#00a7d5;height:8px" displayTemplate="%{95}"/>
+                </div>
+
+                <h:outputText id="output5" /><span style="padding-right: 200px">Behovsafdækning (Forsikring)</span><span >95%<h:outputText>95%</h:outputText></span>
+                <div style="padding-top: 11px;padding-bottom: 15px">
+                    <h:inputHidden id="txt5" value="95"/>
+                    <p:slider disabled="true" for="txt5" display="output5" style="width: 410px;background-color: #00a7d5;border-color:#00a7d5;height:8px" displayTemplate="%{95}"/>
+                </div>
             </div>
         </div>
+
+
+        <div class="layout-dashboard">
+            <div class="p-grid">
+                <div class="p-col-12 p-md-12 p-xl-6">
+                    <div class="card chart">
+                        <div class="card-header">
+                            <h5>Om mig</h5>
+                        </div>
+                        <div class="p-field p-col-align-baseline">
+                            <h:outputText escape="false" disabled="false" value="#{technologyReadBean.technology.richText1}" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="p-col-12 p-md-12 p-xl-6">
+                    <div class="card products">
+                        <div class="card-header">
+                            <h5>Det siger kollegaer</h5>
+
+                        </div>
+                        <div style="font-weight: bold">Mogens Pedersen, IT udvikler Topdanmark:<br/></div>
+                        <div>Jeg har haft fornøjelsen af at arbejde sammen med Søren gennem 6 år i Topdanmarks IT afdeling.
+                            I de første år har vi arbejdet sammen omkring udvikling af forskellige Notes applikationer, senere Java applikationer
+                            og en enkelt mobil app, bygget i power apps kombineret med power automate. De sidste par år har det primært været
+                            omkring opbygning af et nyt intranet i SharePoint Online. Søren er et dejligt positivt menneske.
+                            Han er meget hjælpsom og altid klar til at give den en ekstra skalle for at nå en deadline eller hjælpe en kollega eller en kunde.
+                            Søren har en meget stort viden om intranet i et stort firma. Han har et solidt kendskab til SharePoint online, Samtidig er
+                            Søren meget nysgerrig og klar på at sætte sig ind i nye ting.<br/><br/>
+                        </div>
+                        <div style="font-weight: bold">Jens Erik Pedersen, IT udvikler Topdanmark:<br/></div>
+                        <div>Jeg har været kollega med Søren Hildebrandt i godt 3 år. Søren har et roligt og venligt sind,
+                            og er meget behagelig at arbejde sammen med.
+                            Han er pligtopfyldende, service minded og pålidelig og altid i godt humør.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+       <!-- </div>-->
     </ui:define>
 </ui:composition>
 
