@@ -62,7 +62,7 @@ public class StockAdminBean implements Serializable {
                 "Azure", "PowerApps", "Visual studio", "C-sharp", "AngularJS", "Octopus","Teamcity", "Intranet", "Workflow applikationer", "Support", "Second level support", "Investering", "Kundekontakt", "Aktier","Bæredygtighed", "El-biler","Sol, vind og lagring", "E-handel og platforme", "Bøger", "Musik", "Rejser", "Rejsebog", "Vandreture", "Vandreguide", "Fritid");
         availableCompetanceLevel = Arrays.asList("Vælg niveau", "Meget erfaring", "Godt kendskab", "Mindre kendskab");
 
-        avaliableBusiness = Arrays.asList("Elbiler", "Batteri", "FANG", "Miner", "Vind", "Sol", "Vand", "Hydrogen", "Platforme / Ehandel", "Semiconductors");
+        avaliableBusiness = Arrays.asList("Elbiler", "Batteri", "FANG", "Teknologi", "Miner", "Vind", "Sol", "Vand", "Hydrogen", "Platforme / Ehandel", "Semiconductors");
         avaliableValuta = Arrays.asList("Vælg", "DKK", "NOK","SEK", "USD","EUR");
         newDocument="true";
         id_integer=0;

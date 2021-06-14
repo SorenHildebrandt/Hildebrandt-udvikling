@@ -20,9 +20,9 @@ public class MongoProducer {
 
         if (mongoClient == null) {
             System.out.println("mongo client er null");
-            //MongoClientURI uri = new MongoClientURI("mongodb://hildebra_dbu1:xriGM5nCaU7U@uc4.nodecluster.net/hildebra_db1");
-           //mongoClient = new MongoClient(uri);
-            mongoClient = new MongoClient();
+            MongoClientURI uri = new MongoClientURI("mongodb://hildebra_dbu1:xriGM5nCaU7U@uc4.nodecluster.net/hildebra_db1");
+           mongoClient = new MongoClient(uri);
+            //mongoClient = new MongoClient();
             return mongoClient;
         }
         else {
